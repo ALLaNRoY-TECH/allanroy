@@ -47,7 +47,7 @@ export default function Contact() {
               <h4 className="text-sm text-secondary font-semibold uppercase tracking-widest mb-2">Connect</h4>
               <a href="https://www.linkedin.com/in/allanroy10" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-accent transition-colors w-fit magnetic">LinkedIn</a>
               <a href="https://github.com/ALLaNRoY-TECH" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-accent transition-colors w-fit magnetic">GitHub</a>
-              <a href="#" className="text-xl text-white hover:text-accent transition-colors w-fit magnetic">Download Resume</a>
+              <a href="/resume.pdf" download="ALLAN_ROY_RESUME.pdf" className="text-xl text-white hover:text-accent transition-colors w-fit magnetic">Download Resume</a>
             </div>
           </motion.div>
 
