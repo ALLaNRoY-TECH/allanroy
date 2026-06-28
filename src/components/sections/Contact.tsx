@@ -38,15 +38,15 @@ export default function Contact() {
           >
             <div>
               <h3 className="text-3xl font-bold mb-6">Start a conversation</h3>
-              <a href="mailto:hello@allanroy.com" className="text-xl md:text-2xl text-secondary hover:text-accent transition-colors magnetic inline-block">
-                hello@allanroy.com
+              <a href="mailto:aroy33169@gmail.com" className="text-xl md:text-2xl text-secondary hover:text-accent transition-colors magnetic inline-block">
+                aroy33169@gmail.com
               </a>
             </div>
 
             <div className="flex flex-col gap-4">
               <h4 className="text-sm text-secondary font-semibold uppercase tracking-widest mb-2">Connect</h4>
-              <a href="#" className="text-xl text-white hover:text-accent transition-colors w-fit magnetic">LinkedIn</a>
-              <a href="#" className="text-xl text-white hover:text-accent transition-colors w-fit magnetic">GitHub</a>
+              <a href="https://www.linkedin.com/in/allanroy10" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-accent transition-colors w-fit magnetic">LinkedIn</a>
+              <a href="https://github.com/ALLaNRoY-TECH" target="_blank" rel="noopener noreferrer" className="text-xl text-white hover:text-accent transition-colors w-fit magnetic">GitHub</a>
               <a href="#" className="text-xl text-white hover:text-accent transition-colors w-fit magnetic">Download Resume</a>
             </div>
           </motion.div>
@@ -58,12 +58,18 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col gap-8"
-            onSubmit={(e) => e.preventDefault()}
+            action="https://formsubmit.co/aroy33169@gmail.com" 
+            method="POST"
           >
+            {/* FormSubmit configurations */}
+            <input type="hidden" name="_subject" value="New message from Portfolio!" />
+            <input type="hidden" name="_template" value="box" />
+            
             <div className="relative group">
               <input 
                 type="text" 
                 id="name" 
+                name="name"
                 className="w-full bg-transparent border-b border-white/20 py-4 text-white placeholder-transparent focus:outline-none focus:border-accent transition-colors peer"
                 placeholder="Name"
                 required
@@ -77,6 +83,7 @@ export default function Contact() {
               <input 
                 type="email" 
                 id="email" 
+                name="email"
                 className="w-full bg-transparent border-b border-white/20 py-4 text-white placeholder-transparent focus:outline-none focus:border-accent transition-colors peer"
                 placeholder="Email"
                 required
@@ -89,6 +96,7 @@ export default function Contact() {
             <div className="relative group mt-4">
               <textarea 
                 id="message" 
+                name="message"
                 rows={4}
                 className="w-full bg-transparent border-b border-white/20 py-4 text-white placeholder-transparent focus:outline-none focus:border-accent transition-colors peer resize-none"
                 placeholder="Message"
