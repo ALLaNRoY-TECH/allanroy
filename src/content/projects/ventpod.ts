@@ -18,6 +18,7 @@ export const ventpod: CaseStudy = {
     frontend: "Next.js",
     backend: "[To Be Documented]",
     database: "[To Be Documented]",
+    ai: "[To Be Documented]",
     deployment: "[To Be Documented]",
     metrics: [
       { label: "Active Users tracking", value: 1, suffix: "" },

@@ -33,36 +33,17 @@ const NAV_SECTIONS = [
   { id: "overview", label: "Overview" },
   { id: "problem", label: "Problem Statement" },
   { id: "solution", label: "Solution" },
-  { id: "engineering-decisions", label: "Engineering Decisions" },
   { id: "features", label: "Features" },
   { id: "architecture", label: "Architecture" },
   { id: "apis", label: "API Documentation" },
   { id: "database", label: "Database" },
   { id: "security", label: "Security" },
-  { id: "performance", label: "Performance" },
-  { id: "ai", label: "AI Integration", condition: (p: CaseStudy) => !!p.aiIntegration },
-  { id: "challenges", label: "Challenges" },
-  { id: "timeline", label: "Development Timeline" },
+  { id: "challenges", label: "Engineering Challenges" },
   { id: "lessons", label: "Lessons Learned" },
-  { id: "roadmap", label: "Future Roadmap" },
   { id: "repository", label: "Repository" },
 ];
 
 export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
-  const modalRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [activeSection, setActiveSection] = useState("overview");
-
-  // Reading Progress Bar
-  const { scrollYProgress } = useScroll({
-    container: scrollContainerRef,
-  });
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
   useEffect(() => {
     if (project) {
       document.body.style.overflow = "hidden";
@@ -79,9 +60,31 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
     }
   }, [project, onClose]);
 
+  return (
+    <AnimatePresence>
+      {project && <InnerCaseStudyModal project={project} onClose={onClose} />}
+    </AnimatePresence>
+  );
+}
+
+function InnerCaseStudyModal({ project, onClose }: { project: CaseStudy, onClose: () => void }) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState("overview");
+
+  // Reading Progress Bar
+  const { scrollYProgress } = useScroll({
+    container: scrollContainerRef,
+  });
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   // Intersection Observer for Sticky Nav
   useEffect(() => {
-    if (!project || !scrollContainerRef.current) return;
+    if (!scrollContainerRef.current) return;
 
     const container = scrollContainerRef.current;
     const observer = new IntersectionObserver(
@@ -122,12 +125,9 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
     }
   };
 
-  if (!project) return null;
-
-  const validNavSections = NAV_SECTIONS.filter(nav => nav.condition ? nav.condition(project) : true);
+  const validNavSections = NAV_SECTIONS;
 
   return (
-    <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -207,11 +207,7 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
                 </section>
 
                 <section id="solution" className="scroll-mt-32">
-                  <SolutionSection data={project.solution} />
-                </section>
-
-                <section id="engineering-decisions" className="scroll-mt-32">
-                  <EngineeringDecisions decisions={project.engineeringDecisions} />
+                  <SolutionSection data={project.solution} decisions={project.engineeringDecisions} />
                 </section>
 
                 <section id="features" className="scroll-mt-32">
@@ -219,7 +215,7 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
                 </section>
 
                 <section id="architecture" className="scroll-mt-32">
-                  <ArchitectureSection architecture={project.architecture} />
+                  <ArchitectureSection architecture={project.architecture} performance={project.performance} />
                 </section>
 
                 <section id="apis" className="scroll-mt-32">
@@ -233,16 +229,6 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
                 <section id="security" className="scroll-mt-32">
                   <SecuritySection security={project.security} />
                 </section>
-
-                <section id="performance" className="scroll-mt-32">
-                  <PerformanceSection performance={project.performance} />
-                </section>
-
-                {project.aiIntegration && (
-                  <section id="ai" className="scroll-mt-32">
-                    <AiIntegrationSection ai={project.aiIntegration} />
-                  </section>
-                )}
 
                 <section id="challenges" className="scroll-mt-32">
                   <ChallengesTimeline challenges={project.challenges} />
@@ -269,6 +255,5 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
           </div>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
   );
 }

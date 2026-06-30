@@ -3,7 +3,7 @@
 import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
 import { ProjectId } from "@/types/case-study";
 import { useState, useEffect } from "react";
-import { Shield, ShieldAlert, Cpu, Lock, Brain, TrendingDown, RefreshCcw, Bell, LockKeyhole, Mail, Users, CheckCircle2 } from "lucide-react";
+import { Shield, ShieldAlert, Cpu, Lock, Brain, TrendingDown, RefreshCcw, LockKeyhole, Users, X } from "lucide-react";
 
 export default function ProjectPreviewBoard({ projectId }: { projectId: ProjectId }) {
   const x = useMotionValue(200);
@@ -97,7 +97,7 @@ function SecureScanPreview() {
                 { icon: Cpu, name: "Tech Detection" },
                 { icon: ShieldAlert, name: "OWASP Mapper" }
               ].map((mod, i) => (
-                <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                <div key={`stat-${i}`} className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
                   <div className="flex items-center gap-3">
                     <mod.icon className="w-4 h-4 text-white/70" />
                     <span className="text-white/80">{mod.name}</span>
@@ -257,7 +257,7 @@ function HostelCmsPreview() {
               { id: "TKT-102", room: "B-105", issue: "Wi-Fi Down", status: "RESOLVED" },
               { id: "TKT-103", room: "A-312", issue: "Leaking Pipe", status: "ASSIGNED" },
             ].map((tkt, i) => (
-              <div key={i} className="flex justify-between items-center p-3 border-b border-white/5 text-sm">
+              <div key={`transaction-${i}`} className="flex justify-between items-center p-3 border-b border-white/5 text-sm">
                 <span className="text-white/50 font-mono w-20">{tkt.id}</span>
                 <span className="text-white font-medium w-16">{tkt.room}</span>
                 <span className="text-white/80 flex-1">{tkt.issue}</span>
@@ -330,7 +330,7 @@ function VentPodPreview() {
         {messages.length < 3 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-1 items-center self-start bg-white/5 px-3 py-2 rounded-2xl rounded-bl-sm">
             {[0, 1, 2].map(i => (
-              <motion.div key={i} animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, delay: i * 0.2 }} className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+              <motion.div key={`typing-dot-${i}`} animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, delay: i * 0.2 }} className="w-1.5 h-1.5 bg-white/40 rounded-full" />
             ))}
           </motion.div>
         )}

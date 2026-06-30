@@ -18,6 +18,7 @@ export const hostelCms: CaseStudy = {
     frontend: "React",
     backend: "Node.js",
     database: "[To Be Documented]",
+    ai: "[To Be Documented]",
     deployment: "[To Be Documented]",
     metrics: [
       { label: "Management Modules", value: 4, suffix: "" },

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CaseStudyHero as ICaseStudyHero, EngineeringOverview as IEngineeringOverview, Overview, ProblemStatement, Solution, EngineeringDecision, Feature, Architecture, ApiEndpoint, DatabaseDesign, SecurityInfo, PerformanceInfo, AiIntegration, Challenge, TimelinePhase, RepositoryInfo, Metric } from "@/types/case-study";
 import { motion, AnimatePresence } from "framer-motion";
 import * as LucideIcons from "lucide-react";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 // --- HERO ---
 export function CaseStudyHero({ hero }: { hero: ICaseStudyHero }) {
@@ -16,11 +17,11 @@ export function CaseStudyHero({ hero }: { hero: ICaseStudyHero }) {
       
       <div className="flex gap-4 mt-8">
         <a href={hero.githubUrl} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors flex items-center gap-2">
-          <LucideIcons.Github className="w-4 h-4" /> View Repository
+          <FaGithub className="w-4 h-4" /> View Repository
         </a>
         {hero.liveUrl && (
           <a href={hero.liveUrl} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-white/10 text-white font-semibold hover:bg-white/20 transition-colors border border-white/20 flex items-center gap-2">
-            <LucideIcons.ExternalLink className="w-4 h-4" /> Live Demo
+            <FaExternalLinkAlt className="w-4 h-4" /> Live Demo
           </a>
         )}
       </div>
@@ -45,7 +46,7 @@ export function EngineeringOverview({ data }: { data: IEngineeringOverview }) {
     <div className="w-full">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {cards.map((c, i) => (
-          <div key={i} className="flex flex-col gap-2 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
+          <div key={`overview-card-${i}`} className="flex flex-col gap-2 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
             <div className="flex items-center gap-2 text-white/40 mb-1">
               <c.icon className="w-4 h-4" />
               <span className="text-xs uppercase tracking-wider font-semibold">{c.label}</span>
@@ -58,7 +59,7 @@ export function EngineeringOverview({ data }: { data: IEngineeringOverview }) {
       {/* Metrics Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
         {data.metrics.map((m, i) => (
-          <AnimatedCounter key={i} metric={m} />
+          <AnimatedCounter key={`metric-${m.label}-${i}`} metric={m} />
         ))}
       </div>
     </div>
@@ -138,7 +139,7 @@ export function ProblemSection({ data }: { data: ProblemStatement }) {
           <h3 className="text-xl font-semibold text-white mb-4">Core Pain Points</h3>
           <ul className="space-y-3">
             {data.painPoints.map((p, i) => (
-              <li key={i} className="flex gap-3 items-start">
+              <li key={`painpoint-${i}`} className="flex gap-3 items-start">
                 <LucideIcons.AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
                 <span>{p}</span>
               </li>
@@ -151,7 +152,7 @@ export function ProblemSection({ data }: { data: ProblemStatement }) {
 }
 
 // --- SOLUTION ---
-export function SolutionSection({ data }: { data: Solution }) {
+export function SolutionSection({ data, decisions }: { data: Solution, decisions?: EngineeringDecision[] }) {
   return (
     <div className="space-y-6">
       <h2 className="text-3xl font-bold text-white mb-6">The Solution</h2>
@@ -180,6 +181,12 @@ export function SolutionSection({ data }: { data: Solution }) {
           </div>
         </div>
       </div>
+
+      {decisions && decisions.length > 0 && (
+        <div className="mt-16 pt-16 border-t border-white/10">
+          <EngineeringDecisions decisions={decisions} />
+        </div>
+      )}
     </div>
   );
 }
@@ -193,7 +200,7 @@ export function EngineeringDecisions({ decisions }: { decisions: EngineeringDeci
       
       <div className="grid gap-12">
         {decisions.map((d, i) => (
-          <div key={i} className="flex flex-col gap-6 p-8 rounded-3xl bg-white/[0.02] border border-white/10 relative overflow-hidden">
+          <div key={`decision-${d.technology}-${i}`} className="flex flex-col gap-6 p-8 rounded-3xl bg-white/[0.02] border border-white/10 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-8 opacity-5">
               <LucideIcons.Code2 className="w-32 h-32" />
             </div>
@@ -231,7 +238,7 @@ export function EngineeringDecisions({ decisions }: { decisions: EngineeringDeci
                 </div>
                 <div className="p-4 bg-white/5 rounded-xl border border-white/10">
                   <span className="text-xs font-bold text-white/60 uppercase tracking-widest block mb-1">Lesson Learned</span>
-                  <p className="text-white/80 font-light text-sm italic">"{d.lessonsLearned}"</p>
+                  <p className="text-white/80 font-light text-sm italic">&quot;{d.lessonsLearned}&quot;</p>
                 </div>
               </div>
             </div>
@@ -249,10 +256,10 @@ export function FeaturesGrid({ features }: { features: Feature[] }) {
       <h2 className="text-3xl font-bold text-white mb-6">Core Features</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {features.map((f, i) => {
-          // @ts-ignore - dynamic icon loading
+          // @ts-expect-error - dynamic icon loading
           const Icon = LucideIcons[f.icon] || LucideIcons.Code;
           return (
-            <div key={i} className="group p-8 rounded-3xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300">
+            <div key={`feature-${f.title}-${i}`} className="group p-8 rounded-3xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300">
               <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Icon className="text-white w-6 h-6" />
               </div>
@@ -268,7 +275,7 @@ export function FeaturesGrid({ features }: { features: Feature[] }) {
 }
 
 // --- INTERACTIVE ARCHITECTURE ---
-export function ArchitectureSection({ architecture }: { architecture: Architecture }) {
+export function ArchitectureSection({ architecture, performance }: { architecture: Architecture, performance?: PerformanceInfo }) {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
   const nodes = [
@@ -352,7 +359,7 @@ export function ArchitectureSection({ architecture }: { architecture: Architectu
                     <span className="text-xs font-bold text-white/40 uppercase tracking-widest block mb-2">Technologies</span>
                     <div className="flex flex-wrap gap-2">
                       {node.data.technologies.split(',').map(t => (
-                        <span key={t} className="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white/80">{t.trim()}</span>
+                        <span key={`tech-${t.trim()}-${i}`} className="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white/80">{t.trim()}</span>
                       ))}
                     </div>
                   </div>
@@ -367,6 +374,12 @@ export function ArchitectureSection({ architecture }: { architecture: Architectu
           Data Flow: {architecture.communicationFlow}
         </div>
       </div>
+
+      {performance && (
+        <div className="mt-16 pt-16 border-t border-white/10">
+          <PerformanceSection performance={performance} />
+        </div>
+      )}
     </div>
   );
 }
@@ -389,7 +402,7 @@ export function ApiTable({ apis }: { apis: ApiEndpoint[] }) {
             </thead>
             <tbody className="divide-y divide-white/5 text-white/80 font-light text-sm">
               {apis.map((api, i) => (
-                <React.Fragment key={i}>
+                <React.Fragment key={`api-${api.name}-${i}`}>
                   <tr className="hover:bg-white/[0.02] transition-colors group">
                     <td className="p-4 align-top">
                       <div className="flex flex-col gap-2">
@@ -399,7 +412,7 @@ export function ApiTable({ apis }: { apis: ApiEndpoint[] }) {
                     </td>
                     <td className="p-4 align-top">
                       <p className="mb-2">{api.purpose}</p>
-                      <p className="text-xs text-white/40 italic">"{api.reason}"</p>
+                      <p className="text-xs text-white/40 italic">&quot;{api.reason}&quot;</p>
                     </td>
                     <td className="p-4 align-top">
                       <span className="bg-white/10 px-2 py-1 rounded-full text-xs">{api.authentication}</span>
@@ -476,7 +489,7 @@ export function SecuritySection({ security }: { security: SecurityInfo }) {
           <div className="flex-1">
             <strong className="text-white block mb-2 font-semibold">OWASP Mitigation</strong>
             <ul className="list-disc pl-4 text-sm space-y-1">
-              {security.owasp.map((o,i)=><li key={i}>{o}</li>)}
+              {security.owasp.map((o,i)=><li key={`owasp-${i}`}>{o}</li>)}
             </ul>
           </div>
           <div className="flex-1 space-y-4">
@@ -563,7 +576,7 @@ export function ChallengesTimeline({ challenges }: { challenges: Challenge[] }) 
       <h2 className="text-3xl font-bold text-white mb-6">Engineering Challenges</h2>
       <div className="space-y-8">
         {challenges.map((c, i) => (
-          <div key={i} className="pl-8 border-l-2 border-white/10 relative">
+          <div key={`challenge-${c.problem.substring(0,10)}-${i}`} className="pl-8 border-l-2 border-white/10 relative">
             <div className="absolute w-4 h-4 bg-black border-2 border-accent rounded-full -left-[9px] top-1" />
             <h3 className="text-xl font-bold text-white mb-4">{c.problem}</h3>
             <div className="grid gap-4 text-white/70 font-light text-sm">
@@ -594,7 +607,7 @@ export function DevelopmentTimeline({ timeline }: { timeline: TimelinePhase[] })
       <h2 className="text-3xl font-bold text-white mb-6">Development Timeline</h2>
       <div className="flex flex-col gap-4 relative">
         {timeline.map((t, i) => (
-          <div key={i} className="flex items-center gap-6">
+          <div key={`timeline-${t.phase}-${i}`} className="flex items-center gap-6">
             <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-mono text-white/40 text-sm shrink-0">
               0{i + 1}
             </div>
@@ -615,7 +628,7 @@ export function LessonsSection({ lessons }: { lessons: string[] }) {
       <h2 className="text-3xl font-bold text-white mb-6">Key Takeaways</h2>
       <ul className="space-y-4">
         {lessons.map((l, i) => (
-          <li key={i} className="flex gap-4 items-start text-white/80 font-light">
+          <li key={`lesson-${i}`} className="flex gap-4 items-start text-white/80 font-light">
             <LucideIcons.CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0 mt-0.5" />
             <span className="leading-relaxed">{l}</span>
           </li>
@@ -631,7 +644,7 @@ export function FutureRoadmap({ roadmap }: { roadmap: string[] }) {
       <h2 className="text-3xl font-bold text-white mb-6">Future Roadmap</h2>
       <div className="flex flex-wrap gap-3">
         {roadmap.map((r, i) => (
-          <div key={i} className="px-5 py-3 rounded-xl border border-white/10 bg-white/5 text-white/80 font-medium text-sm flex items-center gap-3 hover:bg-white/10 transition-colors">
+          <div key={`roadmap-${i}`} className="px-5 py-3 rounded-xl border border-white/10 bg-white/5 text-white/80 font-medium text-sm flex items-center gap-3 hover:bg-white/10 transition-colors">
             <LucideIcons.Milestone className="w-4 h-4 text-white/40" />
             {r}
           </div>
@@ -646,7 +659,7 @@ export function RepositorySection({ repo }: { repo: RepositoryInfo }) {
   return (
     <div className="w-full mt-12 pb-12">
       <div className="p-10 rounded-[2rem] bg-gradient-to-br from-[#0d1117] to-[#161b22] border border-white/10 relative overflow-hidden shadow-2xl">
-        <LucideIcons.Github className="absolute -right-8 -bottom-8 w-64 h-64 text-white/5 rotate-12 pointer-events-none" />
+        <FaGithub className="absolute -right-8 -bottom-8 w-64 h-64 text-white/5 rotate-12 pointer-events-none" />
         
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
           <div>
@@ -671,7 +684,7 @@ export function RepositorySection({ repo }: { repo: RepositoryInfo }) {
               rel="noreferrer" 
               className="px-4 py-2 rounded-lg bg-white text-black font-bold hover:bg-white/90 transition-colors flex items-center gap-2 text-sm"
             >
-              <LucideIcons.Github className="w-4 h-4" /> Open
+              <FaGithub className="w-4 h-4" /> Open
             </a>
           </div>
         </div>
@@ -681,19 +694,11 @@ export function RepositorySection({ repo }: { repo: RepositoryInfo }) {
             <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
             {repo.primaryLanguage}
           </div>
-          <div className="flex items-center gap-2">
-            <LucideIcons.Scale className="w-4 h-4" />
-            {repo.license} License
-          </div>
-          <div className="flex items-center gap-2">
-            <LucideIcons.History className="w-4 h-4" />
-            Updated {repo.lastUpdated}
-          </div>
         </div>
 
         <div className="relative z-10 mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-2">
-          {repo.techStack.map(t => (
-            <span key={t} className="px-3 py-1 bg-white/5 rounded-full border border-white/5 text-xs font-medium text-white/70">{t}</span>
+          {repo.techStack.map((t, i) => (
+            <span key={`stack-${t}-${i}`} className="px-3 py-1 bg-white/5 rounded-full border border-white/5 text-xs font-medium text-white/70">{t}</span>
           ))}
         </div>
       </div>

@@ -1,7 +1,8 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import ExperienceCursorHint from "../experience/ExperienceCursorHint";
 import MemoryArchiveModal from "../experience/MemoryArchiveModal";
 
@@ -44,13 +45,17 @@ export default function Experience() {
     }, 800); // Wait for modal fade out
   };
 
-  // Generate tiny sparkle particles for the hover effect
-  const sparkles = Array.from({ length: 5 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100, // percentage
-    y: Math.random() * 100, // percentage
-    delay: Math.random() * 0.5,
-  }));
+  // Generate tiny sparkle particles for the hover effect using lazy initialization
+  // Safe from hydration mismatch because it only renders when isHovering is true (which is false initially)
+  const [sparkles] = useState<{id: number, x: number, y: number, delay: number}[]>(() => {
+    if (typeof window === 'undefined') return [];
+    return Array.from({ length: 5 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100, // percentage
+      y: Math.random() * 100, // percentage
+      delay: Math.random() * 0.5,
+    }));
+  });
 
   return (
     <>
@@ -184,6 +189,18 @@ export default function Experience() {
                   </AnimatePresence>
                 </div>
                 
+                {/* NEW LEADERSHIP JOURNEY BUTTON */}
+                <div className="mb-6">
+                  <button 
+                    onClick={handleArchiveClick}
+                    className="group relative inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white/90 font-medium text-sm transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 opacity-0 group-hover:opacity-100 translate-x-[-100%] group-hover:translate-x-[100%] transition-all duration-700 ease-in-out"></div>
+                    <span className="relative z-10">📸 View Leadership Journey</span>
+                    <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+
                 <ul className="flex flex-col gap-3 text-white/70">
                   <li className="flex gap-3">
                     <span className="text-accent mt-1">✦</span>

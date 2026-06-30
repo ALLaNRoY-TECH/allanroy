@@ -90,7 +90,7 @@ export default function Achievements() {
         >
           {/* Double array for seamless loop */}
           {[...services, ...services].map((service, idx) => (
-            <div key={idx} className="flex items-center mx-8">
+            <div key={`marquee-${service.substring(0, 5)}-${idx}`} className="flex items-center mx-8">
               <span className="text-4xl md:text-6xl font-black text-black uppercase tracking-tighter">
                 {service}
               </span>

@@ -24,7 +24,7 @@ export default function Projects() {
     // Calculate how far to scroll horizontally
     // It's the total width of the container minus the viewport width
     const getScrollAmount = () => {
-      let scrollWidth = scrollContainer.scrollWidth;
+      const scrollWidth = scrollContainer.scrollWidth;
       return -(scrollWidth - window.innerWidth);
     };
 

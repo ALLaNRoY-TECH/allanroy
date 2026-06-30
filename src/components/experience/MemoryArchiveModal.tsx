@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { journeyMemories, Memory } from "@/data/codingNinjasJourney";
+import { checkImageExists } from "@/actions/checkImage";
 
 interface MemoryArchiveModalProps {
   isOpen: boolean;
@@ -9,6 +10,31 @@ interface MemoryArchiveModalProps {
 }
 
 export default function MemoryArchiveModal({ isOpen, onClose }: MemoryArchiveModalProps) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      const handleEsc = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          // Inner component will handle its own escape key for image viewer, but we handle general close here
+          onClose();
+        }
+      };
+      window.addEventListener("keydown", handleEsc);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleEsc);
+      };
+    }
+  }, [isOpen, onClose]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && <InnerMemoryArchiveModal onClose={onClose} />}
+    </AnimatePresence>
+  );
+}
+
+function InnerMemoryArchiveModal({ onClose }: { onClose: () => void }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -25,25 +51,19 @@ export default function MemoryArchiveModal({ isOpen, onClose }: MemoryArchiveMod
   });
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      const handleEsc = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          if (selectedImage) setSelectedImage(null);
-          else onClose();
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (selectedImage) {
+          setSelectedImage(null);
+          e.stopPropagation();
         }
-      };
-      window.addEventListener("keydown", handleEsc);
-      return () => {
-        document.body.style.overflow = "";
-        window.removeEventListener("keydown", handleEsc);
-      };
-    }
-  }, [isOpen, selectedImage, onClose]);
+      }
+    };
+    window.addEventListener("keydown", handleEsc, { capture: true });
+    return () => window.removeEventListener("keydown", handleEsc, { capture: true });
+  }, [selectedImage]);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
         <motion.div
           initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
           animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
@@ -78,7 +98,7 @@ export default function MemoryArchiveModal({ isOpen, onClose }: MemoryArchiveMod
               >
                 <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight">Leadership Journey</h1>
                 <p className="text-white/60 text-lg max-w-2xl mx-auto font-light">
-                  "Moments that shaped my growth as a leader, organizer, and engineer."
+                  &quot;Moments that shaped my growth as a leader, organizer, and engineer.&quot;
                 </p>
               </motion.div>
 
@@ -117,14 +137,18 @@ export default function MemoryArchiveModal({ isOpen, onClose }: MemoryArchiveMod
           />
 
         </motion.div>
-      )}
-    </AnimatePresence>
   );
 }
 
 // Sub-component for individual timeline nodes
 function TimelineNode({ memory, index, onImageClick }: { memory: Memory, index: number, onImageClick: () => void }) {
-  const [imageError, setImageError] = useState(false);
+  const [imageExists, setImageExists] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    checkImageExists(memory.imageUrl)
+      .then(setImageExists)
+      .catch(() => setImageExists(false));
+  }, [memory.imageUrl]);
 
   // Use framer motion's whileInView to trigger animations when scrolling
   return (
@@ -156,9 +180,11 @@ function TimelineNode({ memory, index, onImageClick }: { memory: Memory, index: 
         {/* Image Container with hover effects */}
         <div 
           className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden cursor-pointer"
-          onClick={!imageError ? onImageClick : undefined}
+          onClick={imageExists ? onImageClick : undefined}
         >
-          {!imageError ? (
+          {imageExists === null ? (
+            <div className="w-full h-full bg-white/5 animate-pulse" />
+          ) : imageExists ? (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
@@ -166,7 +192,6 @@ function TimelineNode({ memory, index, onImageClick }: { memory: Memory, index: 
                 alt={memory.title}
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 loading="lazy"
-                onError={() => setImageError(true)}
               />
               {/* Soft Glow Overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />

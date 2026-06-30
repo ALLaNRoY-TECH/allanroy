@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 
 export type ProjectId = 'securescan' | 'subsense' | 'ventpod' | 'hostel-cms';
 
