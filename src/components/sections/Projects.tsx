@@ -1,53 +1,19 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
+import { projects } from "@/data/projectIndex";
+import { ProjectId } from "@/types/case-study";
+import CaseStudyModal from "../case-study/CaseStudyModal";
+import { getCaseStudy } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const projects = [
-  {
-    title: "ScureScan",
-    subtitle: "AI Website Security Scanner",
-    description: "AI-powered website vulnerability scanner with intelligent security analysis, featuring SSL Analysis, Technology Detection, OWASP Recommendations, and Risk Scoring.",
-    tags: ["Next.js", "Python", "AI Insights", "Security Headers"],
-    color: "from-blue-500/20 to-purple-500/20"
-  },
-  {
-    title: "SubSense",
-    subtitle: "AI Subscription Intelligence Platform",
-    description: "Intelligently scan Gmail and PDF statements using Gemini AI to detect subscriptions, analyze savings, and visualize spending habits via a secure dashboard.",
-    tags: ["Next.js", "TypeScript", "Supabase", "Gemini AI", "Google OAuth"],
-    color: "from-green-500/20 to-emerald-500/20"
-  },
-  {
-    title: "Festify",
-    subtitle: "Modern Event Management Platform",
-    description: "Comprehensive platform featuring QR Ticketing, Role-based Authentication, Organizer/Student Dashboards, and Real-time Registration analytics.",
-    tags: ["React", "Node.js", "RBAC", "QR Auth"],
-    color: "from-orange-500/20 to-red-500/20"
-  },
-  {
-    title: "VentPod",
-    subtitle: "Anonymous Mental Health Platform",
-    description: "Privacy-first architecture ensuring secure, real-time anonymous messaging with a highly secure backend.",
-    tags: ["Flask", "MySQL", "WebSockets", "Privacy-first"],
-    color: "from-indigo-500/20 to-blue-500/20"
-  },
-  {
-    title: "Hostel CMS",
-    subtitle: "Role-Based Complaint Management System",
-    description: "Streamlined system with distinct dashboards for Students, Wardens, and Admins. Features complaint tracking and robust REST APIs.",
-    tags: ["REST API", "RBAC", "MySQL", "Authentication"],
-    color: "from-yellow-500/20 to-orange-500/20"
-  }
-];
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [selectedProjectId, setSelectedProjectId] = useState<ProjectId | null>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -123,7 +89,10 @@ export default function Projects() {
                   ))}
                 </div>
                 
-                <button className="magnetic w-fit px-8 py-3 rounded-full bg-white text-black font-semibold text-sm hover:scale-105 transition-transform duration-300">
+                <button 
+                  onClick={() => setSelectedProjectId(project.id as ProjectId)}
+                  className="magnetic w-fit px-8 py-3 rounded-full bg-white text-black font-semibold text-sm hover:scale-105 transition-transform duration-300"
+                >
                   VIEW CASE STUDY
                 </button>
               </div>
@@ -135,6 +104,11 @@ export default function Projects() {
         {/* End padding for aesthetic scrolling */}
         <div className="w-[10vw] shrink-0"></div>
       </div>
+
+      <CaseStudyModal 
+        project={selectedProjectId ? getCaseStudy(selectedProjectId) || null : null} 
+        onClose={() => setSelectedProjectId(null)} 
+      />
     </section>
   );
 }
