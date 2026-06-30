@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import { journeyMemories, Memory } from "@/data/codingNinjasJourney";
 import { checkImageExists } from "@/actions/checkImage";
 
@@ -179,18 +180,28 @@ function TimelineNode({ memory, index, onImageClick }: { memory: Memory, index: 
         
         {/* Image Container with hover effects */}
         <div 
-          className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden cursor-pointer"
+          className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           onClick={imageExists ? onImageClick : undefined}
+          role={imageExists ? "button" : "presentation"}
+          tabIndex={imageExists ? 0 : -1}
+          aria-label={imageExists ? `View full image for ${memory.title}` : undefined}
+          onKeyDown={(e) => {
+            if (imageExists && (e.key === "Enter" || e.key === " ")) {
+              e.preventDefault();
+              onImageClick();
+            }
+          }}
         >
           {imageExists === null ? (
             <div className="w-full h-full bg-white/5 animate-pulse" />
           ) : imageExists ? (
             <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
+              <Image 
                 src={memory.imageUrl} 
                 alt={memory.title}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                fill
+                sizes="(max-width: 768px) 100vw, 100vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 loading="lazy"
               />
               {/* Soft Glow Overlay on hover */}
@@ -304,17 +315,24 @@ function ImageViewer({ selectedImage, onClose, memories, setTargetImage }: { sel
             </button>
           </div>
 
-          <motion.img
-            key={selectedImage} // forces re-animation when image changes
+          <motion.div
+            key={selectedImage}
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            src={selectedImage}
-            alt="Fullscreen Memory"
-            className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
+            className="relative w-full max-w-5xl h-[80vh] rounded-xl overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
-          />
+          >
+            <Image
+              src={selectedImage}
+              alt="Fullscreen Memory"
+              fill
+              sizes="100vw"
+              className="object-contain"
+              priority
+            />
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
