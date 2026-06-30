@@ -27,18 +27,20 @@ export const securescan: CaseStudy = {
   },
   overview: {
     what: "AI-powered website vulnerability scanner with intelligent security analysis.",
-    why: "[To Be Documented - Specific motivation for building SecureScan]",
-    who: "[To Be Documented - Target audience]",
-    businessValue: "[To Be Documented - Business impact]"
+    why: "I built SecureScan to make basic web security assessments more accessible for developers, students, freelancers, and small teams who don't have dedicated security expertise.",
+    who: "Full-stack developers, student developers, startup founders, freelance developers, small businesses, and security learners.",
+    businessValue: "Bridges the gap between raw technical security reports (like Nessus or OWASP ZAP) and developer understanding by combining automated security scanning with AI-powered explanations that clarify risks and remediation steps."
   },
   problemStatement: {
-    problem: "[To Be Documented - Specific security problem being addressed]",
-    difficulty: "[To Be Documented - Why this was technically difficult to build]",
-    limitations: "[To Be Documented - Limitations of existing solutions]",
+    problem: "Many developers deploy projects without checking for common security issues such as missing HTTP security headers, weak SSL/TLS configurations, or exposed network ports.",
+    difficulty: "Designing a scanning pipeline that remained modular while supporting multiple independent scanners returning disparate data structures.",
+    limitations: "Existing security tools are often designed for experienced penetration testers and can be overwhelmingly difficult for beginners to interpret or act upon.",
     painPoints: [
-      "[To Be Documented]",
+      "Developers lack easy-to-use tools for basic security validation.",
+      "Traditional security reports generate raw technical data without context.",
+      "Security remediation requires specialized knowledge."
     ],
-    businessImpact: "[To Be Documented]"
+    businessImpact: "Automates security checks and presents results in a clean dashboard with actionable remediation steps, reducing security risks for non-expert developers."
   },
   solution: {
     architecture: "[To Be Documented - Actual architecture implemented]",
@@ -49,20 +51,12 @@ export const securescan: CaseStudy = {
   },
   engineeringDecisions: [
     {
-      technology: "Next.js",
-      why: "[To Be Documented - Exact reasoning for Next.js]",
-      alternativesConsidered: "[To Be Documented]",
-      tradeoffs: "[To Be Documented]",
-      benefits: "[To Be Documented]",
-      lessonsLearned: "[To Be Documented]"
-    },
-    {
-      technology: "Python",
-      why: "[To Be Documented - Exact reasoning for Python backend]",
-      alternativesConsidered: "[To Be Documented]",
-      tradeoffs: "[To Be Documented]",
-      benefits: "[To Be Documented]",
-      lessonsLearned: "[To Be Documented]"
+      technology: "Python (FastAPI Backend)",
+      why: "SecureScan performs backend-heavy security analysis. Python has a significantly stronger ecosystem for networking, cybersecurity, SSL analysis, and security automation than Node.js.",
+      alternativesConsidered: "Next.js API Routes / Node.js",
+      tradeoffs: "Separating the frontend and backend introduced additional operational complexity (managing independent development servers, API communication, environments, and deployments).",
+      benefits: "Provided cleaner separation of concerns, independent scalability, reusable backend APIs, and the ability to extend the scanning engine independently of the frontend.",
+      lessonsLearned: "A decoupled architecture ensures long-term maintainability when building domain-heavy services like cybersecurity tools."
     }
   ],
   features: [
@@ -148,29 +142,29 @@ export const securescan: CaseStudy = {
     memoryOptimization: "[To Be Documented]"
   },
   aiIntegration: {
-    model: "[To Be Documented]",
-    promptEngineering: "[To Be Documented]",
-    responseParsing: "[To Be Documented]",
-    structuredOutput: "[To Be Documented]",
+    model: "AI Insights Engine",
+    promptEngineering: "Provided structured security scan results to the AI rather than raw scans.",
+    responseParsing: "AI parses the structured data to prioritize issues and generate plain-English remediation.",
+    structuredOutput: "Deterministic scan aggregation before AI inference.",
     fallbackLogic: "[To Be Documented]",
     rateLimits: "[To Be Documented]",
     errorHandling: "[To Be Documented]",
-    tokenOptimization: "[To Be Documented]"
+    tokenOptimization: "Scanning engine performs deterministic vulnerability discovery; AI is restricted purely to interpretation, saving tokens and preventing hallucinations."
   },
   challenges: [
     {
-      problem: "[To Be Documented - Real technical blocker]",
-      rootCause: "[To Be Documented]",
-      solution: "[To Be Documented]",
-      outcome: "[To Be Documented]",
-      lessons: "[To Be Documented]"
+      problem: "Designing a modular scanning pipeline supporting multiple independent scanners.",
+      rootCause: "Different scanners returned different data structures and response formats. As more scanners were added, integrating their outputs into a single cohesive report became increasingly brittle and tightly coupled.",
+      solution: "Redesigned the architecture so that every scanner followed a consistent interface and returned standardized, normalized scan objects that could be predictably aggregated.",
+      outcome: "Enabled a unified reporting structure and simplified the AI integration since the AI always received predictable structured input regardless of which scanners executed.",
+      lessons: "A modular architecture with standardized interfaces makes adding new features significantly easier than continuously patching tightly coupled components."
     }
   ],
   developmentTimeline: [
-    { phase: "Implementation", description: "[To Be Documented]" }
+    { phase: "Implementation", description: "Built decoupled Next.js and Python FastAPI architecture." }
   ],
   lessonsLearned: [
-    "[To Be Documented - Real technical lesson]"
+    "Extensibility should be considered from the beginning. Designing around strict contracts and predictable outputs simplifies testing, reporting, and future AI integrations."
   ],
   futureRoadmap: [
     "[To Be Documented]"

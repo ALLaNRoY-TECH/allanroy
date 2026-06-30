@@ -27,7 +27,7 @@ export default function Experience() {
     // 0ms: Dot expands (handled by state isOpening)
     // 200ms: Text changes
     setTimeout(() => {
-      setDisplayText("Opening Memory Archive...");
+      setDisplayText("Opening Leadership Journey...");
     }, 200);
 
     // 500ms: Trigger modal (modal has 0.8s fade in, so it takes over)
@@ -149,7 +149,7 @@ export default function Experience() {
               >
                 <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-accent transition-colors">Corporate Head</h3>
                 
-                {/* Interactive Memory Archive Trigger */}
+                {/* Interactive Leadership Journey Trigger */}
                 <div 
                   className="relative inline-block mb-4"
                   onMouseEnter={() => setIsHovering(true)}
@@ -229,7 +229,7 @@ export default function Experience() {
       {/* Global Cursor Hint (Only visible when hovering over the trigger and modal is closed) */}
       <ExperienceCursorHint isVisible={isHovering && !isOpening} mouseX={mouseX} mouseY={mouseY} />
 
-      {/* Memory Archive Modal */}
+      {/* Leadership Journey Modal */}
       <MemoryArchiveModal isOpen={modalOpen} onClose={handleModalClose} />
     </>
   );

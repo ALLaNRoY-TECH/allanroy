@@ -31,36 +31,53 @@ export function CaseStudyHero({ hero }: { hero: ICaseStudyHero }) {
 
 // --- ENGINEERING OVERVIEW (Premium Dashboard) ---
 export function EngineeringOverview({ data }: { data: IEngineeringOverview }) {
-  const cards = [
+  const isPlaceholder = (val?: string) => !val || val === "[To Be Documented]";
+
+  const fields = [
     { icon: LucideIcons.FolderGit2, label: "Project Type", value: data.projectType },
-    { icon: LucideIcons.UserCog, label: "Role", value: "Full-Stack Engineer" }, // Hardcoded or passed from hero
     { icon: LucideIcons.Clock, label: "Complexity", value: data.complexity },
     { icon: LucideIcons.LayoutTemplate, label: "Frontend", value: data.frontend },
     { icon: LucideIcons.Server, label: "Backend", value: data.backend },
     { icon: LucideIcons.Database, label: "Database", value: data.database },
-    { icon: LucideIcons.Bot, label: "AI Model", value: data.ai },
+    { icon: LucideIcons.Bot, label: "AI & APIs", value: data.ai },
     { icon: LucideIcons.Cloud, label: "Deployment", value: data.deployment },
-  ];
+  ].filter(f => !isPlaceholder(f.value));
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {cards.map((c, i) => (
-          <div key={`overview-card-${i}`} className="flex flex-col gap-2 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
-            <div className="flex items-center gap-2 text-white/40 mb-1">
-              <c.icon className="w-4 h-4" />
-              <span className="text-xs uppercase tracking-wider font-semibold">{c.label}</span>
+      <div className="p-8 md:p-10 rounded-[2rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+        {/* Subtle background glow */}
+        <div className="absolute -top-32 -right-32 w-64 h-64 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
+        
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Left Column: Tech Stack / Meta */}
+          <div className="flex flex-col gap-6">
+            <h3 className="text-white/40 uppercase tracking-widest text-xs font-bold mb-2">Technical Overview</h3>
+            <div className="grid grid-cols-1 gap-4">
+              {fields.map((c, i) => (
+                <div key={`overview-card-${i}`} className="flex items-center justify-between border-b border-white/5 pb-3 group">
+                  <div className="flex items-center gap-3 text-white/50 group-hover:text-white/80 transition-colors">
+                    <c.icon className="w-4 h-4" />
+                    <span className="text-sm font-medium">{c.label}</span>
+                  </div>
+                  <span className="text-white font-semibold text-sm text-right max-w-[60%] truncate">{c.value}</span>
+                </div>
+              ))}
             </div>
-            <span className="text-white font-medium text-sm md:text-base">{c.value}</span>
           </div>
-        ))}
-      </div>
-      
-      {/* Metrics Row */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-        {data.metrics.map((m, i) => (
-          <AnimatedCounter key={`metric-${m.label}-${i}`} metric={m} />
-        ))}
+
+          {/* Right Column: Metrics */}
+          {data.metrics && data.metrics.length > 0 && (
+            <div className="flex flex-col gap-6 border-t md:border-t-0 md:border-l border-white/5 pt-8 md:pt-0 md:pl-8">
+              <h3 className="text-white/40 uppercase tracking-widest text-xs font-bold mb-2">Project Metrics</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {data.metrics.map((m, i) => (
+                  <AnimatedCounter key={`metric-${m.label}-${i}`} metric={m} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -159,8 +176,8 @@ export function SolutionSection({ data, decisions }: { data: Solution, decisions
       <div className="grid gap-6">
         <div className="p-8 rounded-3xl bg-gradient-to-br from-white/[0.05] to-transparent border border-white/10">
           <h3 className="text-white font-semibold mb-3">Architecture & Workflow</h3>
-          <p className="text-white/70 leading-relaxed font-light mb-4">{data.architecture}</p>
-          <div className="bg-black/40 px-4 py-3 rounded-lg border border-white/5 font-mono text-sm text-accent/80">
+          <p className="text-white/70 leading-relaxed font-light mb-4 whitespace-pre-wrap">{data.architecture}</p>
+          <div className="bg-black/40 px-4 py-3 rounded-lg border border-white/5 font-mono text-sm text-accent/80 whitespace-pre-wrap">
             {data.workflow}
           </div>
         </div>
@@ -384,54 +401,93 @@ export function ArchitectureSection({ architecture, performance }: { architectur
   );
 }
 
-// --- API TABLE ---
+// --- API DOCUMENTATION (Swagger Style) ---
 export function ApiTable({ apis }: { apis: ApiEndpoint[] }) {
   if (!apis || apis.length === 0) return null;
+
+  const getMethodColor = (method: string = 'GET') => {
+    switch (method.toUpperCase()) {
+      case 'GET': return 'text-blue-400 bg-blue-400/10 border-blue-400/20';
+      case 'POST': return 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20';
+      case 'PUT': return 'text-amber-400 bg-amber-400/10 border-amber-400/20';
+      case 'DELETE': return 'text-red-400 bg-red-400/10 border-red-400/20';
+      default: return 'text-gray-400 bg-gray-400/10 border-gray-400/20';
+    }
+  };
+
   return (
     <div className="space-y-6">
       <h2 className="text-3xl font-bold text-white mb-6">API Documentation</h2>
-      <div className="rounded-2xl border border-white/10 overflow-hidden bg-white/[0.02]">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[600px]">
-            <thead>
-              <tr className="border-b border-white/10 text-white/40 text-xs tracking-widest uppercase bg-black/40">
-                <th className="p-4 font-bold">Endpoint</th>
-                <th className="p-4 font-bold">Purpose</th>
-                <th className="p-4 font-bold">Auth</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/5 text-white/80 font-light text-sm">
-              {apis.map((api, i) => (
-                <React.Fragment key={`api-${api.name}-${i}`}>
-                  <tr className="hover:bg-white/[0.02] transition-colors group">
-                    <td className="p-4 align-top">
-                      <div className="flex flex-col gap-2">
-                        <span className="font-mono text-accent bg-accent/10 px-2 py-1 rounded w-fit text-xs font-bold">{api.endpoints.split(' ')[0]}</span>
-                        <span className="font-mono text-white/70">{api.endpoints.split(' ').slice(1).join(' ')}</span>
+      <div className="flex flex-col gap-6">
+        {apis.map((api, i) => {
+          // Handle both old format (endpoints) and new format (endpoint + method)
+          const rawEndpoint = api.endpoint || api.endpoints || '';
+          const parts = rawEndpoint.split(' ');
+          const method = api.method || (parts.length > 1 ? parts[0] : 'GET');
+          const route = parts.length > 1 ? parts.slice(1).join(' ') : rawEndpoint;
+
+          return (
+            <div key={`api-${i}`} className="rounded-2xl border border-white/10 overflow-hidden bg-[#0d1117] group hover:border-white/20 transition-colors">
+              {/* Header */}
+              <div className="px-6 py-4 border-b border-white/5 bg-white/[0.02] flex flex-col md:flex-row md:items-center gap-4 justify-between">
+                <div className="flex items-center gap-4">
+                  <span className={`px-3 py-1 rounded-md text-xs font-bold border ${getMethodColor(method)}`}>
+                    {method.toUpperCase()}
+                  </span>
+                  <span className="font-mono text-white/80 text-sm">{route}</span>
+                </div>
+                <div className="flex gap-2">
+                  {(api.authRequired !== undefined ? api.authRequired : api.authentication) ? (
+                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium">
+                      <LucideIcons.Lock className="w-3 h-3" /> Auth Required
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+                      <LucideIcons.Unlock className="w-3 h-3" /> Public
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Body */}
+              <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-2">Purpose</h4>
+                    <p className="text-sm text-white/80 font-light">{api.purpose}</p>
+                  </div>
+                  
+                  {(api.requestBody || api.exampleUsage) && (
+                    <div>
+                      <h4 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-2">Request</h4>
+                      <div className="p-4 rounded-xl bg-black/40 border border-white/5 font-mono text-xs text-white/60 whitespace-pre-wrap overflow-x-auto">
+                        {api.requestBody || api.exampleUsage}
                       </div>
-                    </td>
-                    <td className="p-4 align-top">
-                      <p className="mb-2">{api.purpose}</p>
-                      <p className="text-xs text-white/40 italic">&quot;{api.reason}&quot;</p>
-                    </td>
-                    <td className="p-4 align-top">
-                      <span className="bg-white/10 px-2 py-1 rounded-full text-xs">{api.authentication}</span>
-                    </td>
-                  </tr>
-                  {/* Example Usage Row */}
-                  <tr className="bg-black/20">
-                    <td colSpan={3} className="px-4 py-3 border-b border-white/5">
-                      <div className="flex items-center gap-3">
-                        <LucideIcons.Terminal className="w-4 h-4 text-white/30" />
-                        <code className="font-mono text-xs text-white/50 break-all">{api.exampleUsage}</code>
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-6">
+                  {api.response && (
+                    <div>
+                      <h4 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-2">Response</h4>
+                      <div className="p-4 rounded-xl bg-black/40 border border-white/5 font-mono text-xs text-emerald-400/80 whitespace-pre-wrap overflow-x-auto">
+                        {api.response}
                       </div>
-                    </td>
-                  </tr>
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                    </div>
+                  )}
+                  
+                  {api.errorHandling && (
+                    <div>
+                      <h4 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-2">Error Responses</h4>
+                      <p className="text-sm text-red-400/80 font-light">{api.errorHandling}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -439,28 +495,67 @@ export function ApiTable({ apis }: { apis: ApiEndpoint[] }) {
 
 // --- OTHER SECTIONS ---
 export function DatabaseSection({ db }: { db: DatabaseDesign }) {
+  // Parse simple string formats like "users (id, email)" into object { name: "users", cols: ["id", "email"] }
+  const parsedTables = db.tables.map(t => {
+    const match = t.match(/^([a-zA-Z0-9_]+)\s*\((.*)\)$/);
+    if (match) {
+      return { name: match[1], cols: match[2].split(',').map(c => c.trim()) };
+    }
+    return { name: t, cols: [] };
+  });
+
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-white mb-6">Database Design</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white/70 font-light">
-        <div className="space-y-6">
-          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-            <h3 className="text-white font-semibold mb-2 flex items-center gap-2"><LucideIcons.Table className="w-4 h-4 text-accent"/> Tables & Relationships</h3>
-            <p className="mb-2"><strong className="text-white/40 text-sm">Schema:</strong> {db.tables.join(', ')}</p>
-            <p><strong className="text-white/40 text-sm">Rel:</strong> {db.relationships}</p>
+      <h2 className="text-3xl font-bold text-white mb-6">Database Schema</h2>
+      
+      {/* Table Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {parsedTables.map((table, i) => (
+          <div key={`table-${i}`} className="rounded-xl border border-white/10 bg-[#0a0a0a] overflow-hidden group hover:border-white/20 transition-colors">
+            <div className="bg-white/5 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+              <span className="font-mono text-sm font-bold text-accent">{table.name}</span>
+              <LucideIcons.Table className="w-4 h-4 text-white/30" />
+            </div>
+            <div className="p-4">
+              {table.cols.length > 0 ? (
+                <ul className="space-y-2">
+                  {table.cols.map((col, j) => {
+                    const isId = col === 'id' || col.endsWith('_id');
+                    return (
+                      <li key={`col-${j}`} className="flex items-center gap-2 font-mono text-xs text-white/70">
+                        {isId ? <LucideIcons.Key className="w-3 h-3 text-amber-400" /> : <span className="w-3 h-3 block" />}
+                        {col}
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <span className="font-mono text-xs text-white/40">{table.name}</span>
+              )}
+            </div>
           </div>
-          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-            <h3 className="text-white font-semibold mb-2 flex items-center gap-2"><LucideIcons.ShieldCheck className="w-4 h-4 text-accent"/> Constraints & Security</h3>
-            <p className="mb-2"><strong className="text-white/40 text-sm">Rules:</strong> {db.constraints}</p>
-            <p><strong className="text-white/40 text-sm">Security:</strong> {db.security}</p>
+        ))}
+      </div>
+
+      {/* Meta Information Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white/80 font-light text-sm">
+        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
+          <div>
+            <h3 className="text-white/40 uppercase tracking-widest text-xs font-bold mb-2 flex items-center gap-2"><LucideIcons.Link className="w-4 h-4"/> Relationships</h3>
+            <p className="leading-relaxed">{db.relationships}</p>
+          </div>
+          <div>
+            <h3 className="text-white/40 uppercase tracking-widest text-xs font-bold mb-2 flex items-center gap-2"><LucideIcons.ShieldCheck className="w-4 h-4"/> Constraints & Security</h3>
+            <p className="leading-relaxed">{db.constraints} {db.security !== "[To Be Documented]" && db.security}</p>
           </div>
         </div>
-        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-          <h3 className="text-white font-semibold mb-2 flex items-center gap-2"><LucideIcons.Zap className="w-4 h-4 text-accent"/> Optimization & Indexing</h3>
-          <p className="mb-4 text-sm leading-relaxed">{db.optimization}</p>
-          <div className="p-4 bg-black/40 rounded-lg border border-white/5">
-            <strong className="text-white/40 text-xs uppercase tracking-widest block mb-1">Index Strategy</strong>
-            <p className="text-sm font-mono text-white/60">{db.indexes}</p>
+        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
+          <div>
+            <h3 className="text-white/40 uppercase tracking-widest text-xs font-bold mb-2 flex items-center gap-2"><LucideIcons.Zap className="w-4 h-4"/> Optimization & Indexes</h3>
+            <p className="leading-relaxed mb-3">{db.optimization}</p>
+            <div className="p-3 bg-black/40 rounded border border-white/5 font-mono text-xs text-white/60">
+              {db.indexes}
+            </div>
           </div>
         </div>
       </div>
@@ -469,41 +564,50 @@ export function DatabaseSection({ db }: { db: DatabaseDesign }) {
 }
 
 export function SecuritySection({ security }: { security: SecurityInfo }) {
+  const isPlaceholder = (val: string) => !val || val === "[To Be Documented]";
+
+  const securityCards = [
+    { icon: LucideIcons.KeyRound, label: "Authentication", value: security.authentication },
+    { icon: LucideIcons.UserCheck, label: "Authorization", value: security.authorization },
+    { icon: LucideIcons.FileCheck2, label: "Validation", value: security.validation },
+    { icon: LucideIcons.Eraser, label: "Sanitization", value: security.sanitization },
+    { icon: LucideIcons.LockKeyhole, label: "Encryption", value: security.encryption },
+    { icon: LucideIcons.Clock, label: "Rate Limiting", value: security.rateLimiting },
+    { icon: LucideIcons.AlertTriangle, label: "Error Handling", value: security.errorHandling }
+  ].filter(c => !isPlaceholder(c.value));
+
   return (
     <div className="space-y-6">
       <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
         <LucideIcons.Shield className="text-emerald-500" /> Security Implementation
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white/70 font-light">
-        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-          <strong className="text-white block mb-2 font-semibold">Authentication & Authz</strong>
-          <p className="text-sm mb-2">{security.authentication}</p>
-          <p className="text-sm">{security.authorization}</p>
-        </div>
-        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-          <strong className="text-white block mb-2 font-semibold">Validation & Sanitization</strong>
-          <p className="text-sm">{security.validation}</p>
-          <p className="text-sm mt-2">{security.sanitization}</p>
-        </div>
-        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 md:col-span-2 flex flex-col md:flex-row gap-8">
-          <div className="flex-1">
-            <strong className="text-white block mb-2 font-semibold">OWASP Mitigation</strong>
-            <ul className="list-disc pl-4 text-sm space-y-1">
-              {security.owasp.map((o,i)=><li key={`owasp-${i}`}>{o}</li>)}
-            </ul>
-          </div>
-          <div className="flex-1 space-y-4">
-            <div>
-              <strong className="text-white/40 text-xs uppercase tracking-widest block mb-1">Rate Limiting</strong>
-              <p className="text-sm">{security.rateLimiting}</p>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {securityCards.map((card, i) => (
+          <div key={`sec-${i}`} className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col gap-3 group hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-colors">
+            <div className="flex items-center gap-3 text-white/50 group-hover:text-emerald-400 transition-colors">
+              <card.icon className="w-5 h-5" />
+              <h3 className="font-bold text-sm tracking-wide">{card.label}</h3>
             </div>
-            <div>
-              <strong className="text-white/40 text-xs uppercase tracking-widest block mb-1">Encryption</strong>
-              <p className="text-sm">{security.encryption}</p>
-            </div>
+            <p className="text-sm text-white/70 font-light leading-relaxed">{card.value}</p>
           </div>
-        </div>
+        ))}
       </div>
+
+      {security.owasp && security.owasp.length > 0 && security.owasp[0] !== "[To Be Documented]" && (
+        <div className="mt-6 p-6 rounded-2xl bg-red-500/5 border border-red-500/10">
+          <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
+            <LucideIcons.ShieldAlert className="w-5 h-5" /> OWASP Mitigations
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {security.owasp.map((o, i) => (
+              <span key={`owasp-${i}`} className="px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-xs font-medium">
+                {o}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -574,25 +678,53 @@ export function ChallengesTimeline({ challenges }: { challenges: Challenge[] }) 
   return (
     <div className="space-y-8">
       <h2 className="text-3xl font-bold text-white mb-6">Engineering Challenges</h2>
-      <div className="space-y-8">
+      <div className="space-y-12">
         {challenges.map((c, i) => (
-          <div key={`challenge-${c.problem.substring(0,10)}-${i}`} className="pl-8 border-l-2 border-white/10 relative">
-            <div className="absolute w-4 h-4 bg-black border-2 border-accent rounded-full -left-[9px] top-1" />
-            <h3 className="text-xl font-bold text-white mb-4">{c.problem}</h3>
-            <div className="grid gap-4 text-white/70 font-light text-sm">
-              <div className="p-4 rounded-xl bg-red-500/5 border border-red-500/10">
-                <strong className="text-red-400 block mb-1 font-semibold">Root Cause</strong>
-                <p>{c.rootCause}</p>
+          <div key={`challenge-${i}`} className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 shadow-xl relative overflow-hidden">
+            {/* Header: Incident Report */}
+            <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/10">
+              <div className="p-2 bg-red-500/20 rounded-lg text-red-400">
+                <LucideIcons.Siren className="w-6 h-6" />
               </div>
-              <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
-                <strong className="text-emerald-400 block mb-1 font-semibold">Solution & Outcome</strong>
-                <p className="mb-2">{c.solution}</p>
-                <p className="text-white/50 italic">Result: {c.outcome}</p>
+              <div>
+                <h3 className="text-xl font-bold text-white">Incident Report</h3>
+                <p className="text-white/40 text-xs font-mono uppercase tracking-widest mt-1">Severity: High • Resolution: Complete</p>
               </div>
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                <strong className="text-accent block mb-1 font-semibold">Lesson Learned</strong>
-                <p>{c.lessons}</p>
+            </div>
+
+            <div className="relative pl-6 md:pl-10 space-y-8 border-l-2 border-white/5">
+              
+              {/* Problem */}
+              <div className="relative">
+                <div className="absolute -left-[33px] md:-left-[49px] top-1 w-4 h-4 bg-black border-2 border-red-500 rounded-full" />
+                <strong className="text-red-400 text-sm font-bold uppercase tracking-widest block mb-2">Problem</strong>
+                <p className="text-white/80 font-light leading-relaxed">{c.problem}</p>
               </div>
+
+              {/* Root Cause */}
+              <div className="relative">
+                <div className="absolute -left-[33px] md:-left-[49px] top-1 w-4 h-4 bg-black border-2 border-amber-500 rounded-full" />
+                <strong className="text-amber-400 text-sm font-bold uppercase tracking-widest block mb-2">Root Cause</strong>
+                <p className="text-white/80 font-light leading-relaxed">{c.rootCause}</p>
+              </div>
+
+              {/* Solution */}
+              <div className="relative">
+                <div className="absolute -left-[33px] md:-left-[49px] top-1 w-4 h-4 bg-black border-2 border-blue-500 rounded-full" />
+                <strong className="text-blue-400 text-sm font-bold uppercase tracking-widest block mb-2">Solution</strong>
+                <p className="text-white/80 font-light leading-relaxed">{c.solution}</p>
+              </div>
+
+              {/* Outcome & Lesson */}
+              <div className="relative">
+                <div className="absolute -left-[33px] md:-left-[49px] top-1 w-4 h-4 bg-black border-2 border-emerald-500 rounded-full" />
+                <strong className="text-emerald-400 text-sm font-bold uppercase tracking-widest block mb-2">Outcome & Lesson Learned</strong>
+                <div className="p-5 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 space-y-4">
+                  <p className="text-white/90 font-medium italic">&quot;{c.outcome}&quot;</p>
+                  <p className="text-white/60 text-sm font-light">{c.lessons}</p>
+                </div>
+              </div>
+
             </div>
           </div>
         ))}
@@ -623,17 +755,25 @@ export function DevelopmentTimeline({ timeline }: { timeline: TimelinePhase[] })
 }
 
 export function LessonsSection({ lessons }: { lessons: string[] }) {
+  if (!lessons || lessons.length === 0) return null;
   return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-white mb-6">Key Takeaways</h2>
-      <ul className="space-y-4">
+    <div className="space-y-8">
+      <h2 className="text-3xl font-bold text-white mb-6">Lessons Learned</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {lessons.map((l, i) => (
-          <li key={`lesson-${i}`} className="flex gap-4 items-start text-white/80 font-light">
-            <LucideIcons.CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0 mt-0.5" />
-            <span className="leading-relaxed">{l}</span>
-          </li>
+          <div key={`lesson-${i}`} className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 relative group hover:border-white/20 transition-colors">
+            <LucideIcons.Quote className="absolute top-6 right-6 w-8 h-8 text-white/5 group-hover:text-white/10 transition-colors" />
+            <div className="flex gap-4 items-start text-white/80 font-light relative z-10">
+              <div className="mt-1">
+                <span className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center text-xs font-bold border border-accent/30">
+                  {i + 1}
+                </span>
+              </div>
+              <p className="leading-relaxed italic text-white/90">&quot;{l}&quot;</p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
@@ -657,7 +797,7 @@ export function FutureRoadmap({ roadmap }: { roadmap: string[] }) {
 // --- PREMIUM REPOSITORY CARD ---
 export function RepositorySection({ repo }: { repo: RepositoryInfo }) {
   return (
-    <div className="w-full mt-12 pb-12">
+    <div className="w-full mt-24 pt-16 border-t border-white/5 pb-12">
       <div className="p-10 rounded-[2rem] bg-gradient-to-br from-[#0d1117] to-[#161b22] border border-white/10 relative overflow-hidden shadow-2xl">
         <FaGithub className="absolute -right-8 -bottom-8 w-64 h-64 text-white/5 rotate-12 pointer-events-none" />
         

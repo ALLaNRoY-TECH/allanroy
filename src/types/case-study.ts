@@ -87,12 +87,21 @@ export interface Architecture {
 }
 
 export interface ApiEndpoint {
-  name: string;
-  purpose: string;
-  endpoints: string;
-  authentication: string;
-  exampleUsage: string;
-  reason: string;
+  name?: string;
+  endpoints?: string;
+  exampleUsage?: string;
+  reason?: string;
+  
+  // Swagger style fields
+  endpoint?: string;
+  method?: string;
+  purpose?: string;
+  authRequired?: boolean;
+  authentication?: string; // backwards compat
+  requestBody?: string;
+  response?: string;
+  errorHandling?: string;
+  validation?: string;
 }
 
 export interface DatabaseDesign {

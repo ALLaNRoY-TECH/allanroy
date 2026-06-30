@@ -98,7 +98,7 @@ function InnerMemoryArchiveModal({ onClose }: { onClose: () => void }) {
               >
                 <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight">Leadership Journey</h1>
                 <p className="text-white/60 text-lg max-w-2xl mx-auto font-light">
-                  &quot;Moments that shaped my growth as a leader, organizer, and engineer.&quot;
+                  &quot;Moments that shaped my growth as a developer, leader, organizer, and teammate.&quot;
                 </p>
               </motion.div>
 
