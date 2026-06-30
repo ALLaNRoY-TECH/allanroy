@@ -49,7 +49,7 @@ export default function Achievements() {
     <section className="relative w-full py-32 overflow-hidden">
       {/* Achievements Counters */}
       <div className="container mx-auto px-6 md:px-12 mb-32">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 text-center">
           
           <div className="flex flex-col items-center gap-2">
             <Counter from={0} to={5} duration={2.5} suffix="+" />
@@ -64,11 +64,6 @@ export default function Achievements() {
           <div className="flex flex-col items-center gap-2">
             <Counter from={0} to={18} duration={2.5} suffix="+" />
             <span className="text-secondary font-medium tracking-wide uppercase text-sm">REST APIs Built</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-2">
-            <Counter from={0} to={1000} duration={3} suffix="+" />
-            <span className="text-secondary font-medium tracking-wide uppercase text-sm">Hackathon Participants</span>
           </div>
 
           <div className="flex flex-col items-center gap-2 col-span-2 md:col-span-1 lg:col-span-1">

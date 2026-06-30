@@ -30,19 +30,19 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-widest magnetic">
+        <Link href="/" className="text-xl font-bold tracking-widest magnetic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md px-2 py-1">
           ALLAN ROY
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
-          <Link href="#about" className="hover:text-accent transition-colors magnetic">ABOUT</Link>
-          <Link href="#skills" className="hover:text-accent transition-colors magnetic">STACK</Link>
-          <Link href="#projects" className="hover:text-accent transition-colors magnetic">PROJECTS</Link>
-          <Link href="#experience" className="hover:text-accent transition-colors magnetic">EXPERIENCE</Link>
-          <Link href="#contact" className="hover:text-accent transition-colors magnetic">CONTACT</Link>
+          <Link href="#about" className="hover:text-accent transition-colors magnetic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md px-2 py-1">ABOUT</Link>
+          <Link href="#skills" className="hover:text-accent transition-colors magnetic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md px-2 py-1">STACK</Link>
+          <Link href="#projects" className="hover:text-accent transition-colors magnetic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md px-2 py-1">PROJECTS</Link>
+          <Link href="#experience" className="hover:text-accent transition-colors magnetic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md px-2 py-1">EXPERIENCE</Link>
+          <Link href="#contact" className="hover:text-accent transition-colors magnetic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md px-2 py-1">CONTACT</Link>
         </nav>
         <div className="md:hidden">
            {/* Mobile menu toggle could go here */}
-           <button className="magnetic">MENU</button>
+           <button className="magnetic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md px-2 py-1">MENU</button>
         </div>
       </div>
     </motion.header>
