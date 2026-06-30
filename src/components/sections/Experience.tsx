@@ -196,7 +196,7 @@ export default function Experience() {
                     className="group relative inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white/90 font-medium text-sm transition-all duration-300 overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 opacity-0 group-hover:opacity-100 translate-x-[-100%] group-hover:translate-x-[100%] transition-all duration-700 ease-in-out"></div>
-                    <span className="relative z-10">📸 View Leadership Journey</span>
+                    <span className="relative z-10">View Leadership Journey</span>
                     <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
