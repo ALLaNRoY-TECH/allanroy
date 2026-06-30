@@ -6,224 +6,180 @@ export const subsense: CaseStudy = {
     title: "SubSense",
     subtitle: "AI Subscription Intelligence Platform",
     status: "Production",
-    completed: "Jan 2025",
+    completed: "[To Be Documented]",
     role: "Full-Stack Developer",
-    duration: "8 Weeks",
+    duration: "[To Be Documented]",
     techStack: ["Next.js", "TypeScript", "Supabase", "Gemini AI", "Google OAuth"],
     githubUrl: "https://github.com/ALLaNRoY-TECH/subsense",
   },
   engineeringOverview: {
-    projectType: "Consumer FinTech Dashboard",
-    complexity: "Medium",
-    frontend: "Next.js 14, Tailwind",
-    backend: "Next.js API Routes",
-    database: "Supabase (PostgreSQL)",
-    ai: "Gemini 1.5 Flash",
-    deployment: "Vercel",
+    projectType: "FinTech Platform",
+    complexity: "[To Be Documented]",
+    frontend: "Next.js",
+    backend: "[To Be Documented]",
+    database: "Supabase",
+    ai: "Gemini AI",
+    deployment: "[To Be Documented]",
     metrics: [
-      { label: "Emails Processed", value: 10, suffix: "k+" },
-      { label: "Accuracy", value: 99, suffix: "%" },
-      { label: "Active Users", value: 500, suffix: "+" },
-      { label: "Integrations", value: 3 },
+      { label: "Supported Auth", value: 1, suffix: " (Google)" },
     ]
   },
   overview: {
-    what: "An intelligent financial dashboard that scans Gmail and PDF bank statements using AI to detect subscriptions, analyze savings, and visualize spending habits.",
-    why: "People lose hundreds of dollars a year to 'vampire subscriptions' they forgot about. Manual tracking via spreadsheets is tedious and error-prone.",
-    who: "Individuals and small businesses looking to regain control of their recurring expenses without manual data entry.",
-    businessValue: "Helps users identify and cancel unwanted subscriptions, saving an average of $200/year per user."
+    what: "Intelligently scan Gmail and PDF statements using Gemini AI to detect subscriptions.",
+    why: "[To Be Documented - Original motivation]",
+    who: "[To Be Documented - Target users]",
+    businessValue: "Analyze savings and visualize spending habits via a secure dashboard."
   },
   problemStatement: {
-    problem: "Financial data is fragmented. Bank APIs (like Plaid) are expensive for indie devs, and statements are often locked in unstructured PDFs or email receipts.",
-    difficulty: "Extracting structured financial data (Amount, Merchant, Frequency) from wildly different email templates and PDF formats is a notoriously difficult parsing problem.",
-    limitations: "Regex and traditional parsers break every time a company changes their receipt layout.",
+    problem: "[To Be Documented - Specific tracking problem]",
+    difficulty: "[To Be Documented - Why statement extraction is difficult]",
+    limitations: "[To Be Documented]",
     painPoints: [
-      "No single source of truth for subscriptions",
-      "Manual data entry is soul-crushing",
-      "Unnoticed price hikes on existing subscriptions"
+      "[To Be Documented]",
     ],
-    businessImpact: "Consumers bleed money silently because they lack visibility."
+    businessImpact: "[To Be Documented]"
   },
   solution: {
-    architecture: "Next.js frontend with Supabase for Auth/DB. Google OAuth used to fetch Gmail receipts. Serverless functions pipe email bodies to Gemini AI for structured extraction.",
-    workflow: "OAuth Login -> Fetch recent emails -> Filter for receipt keywords -> Send text to Gemini -> Extract JSON -> Store in Supabase -> Visualize on Dashboard.",
-    howItFixes: "Bypasses expensive bank APIs by using the user's inbox as the source of truth, leveraging LLMs to handle the parsing complexity.",
-    scalability: "Serverless architecture scales to zero. AI parsing is the bottleneck, handled via background queues.",
-    security: "Minimal scopes requested for Gmail. Emails are parsed in memory and never stored in the database."
+    architecture: "[To Be Documented]",
+    workflow: "Connect via Google OAuth -> Scan Gmail/PDF -> Gemini AI detection -> Dashboard Visualization",
+    howItFixes: "[To Be Documented]",
+    scalability: "[To Be Documented]",
+    security: "[To Be Documented]"
   },
   engineeringDecisions: [
     {
       technology: "Supabase",
-      why: "Provides out-of-the-box PostgreSQL, Row Level Security, and handles Google OAuth authentication seamlessly.",
-      alternativesConsidered: "Firebase, MongoDB + NextAuth.",
-      tradeoffs: "Vendor lock-in compared to spinning up a custom Postgres instance, but significantly accelerates development.",
-      benefits: "Instant API generation, real-time subscriptions, and built-in edge functions.",
-      lessonsLearned: "PostgreSQL's Row Level Security is incredibly powerful for multi-tenant apps when used correctly."
+      why: "[To Be Documented - Why Supabase was chosen over Firebase/Postgres]",
+      alternativesConsidered: "[To Be Documented]",
+      tradeoffs: "[To Be Documented]",
+      benefits: "[To Be Documented]",
+      lessonsLearned: "[To Be Documented]"
     },
     {
       technology: "Gemini AI",
-      why: "Exceptional at zero-shot extraction of structured JSON from messy text (emails/PDFs) with a very generous free tier.",
-      alternativesConsidered: "OpenAI gpt-4o-mini, local SpaCy models.",
-      tradeoffs: "Hallucinations are possible; requires strict prompt constraints and validation schemas before saving to DB.",
-      benefits: "Massive context window allows passing entire raw email HTML blocks without pre-processing.",
-      lessonsLearned: "Zod schemas are absolutely mandatory when working with LLM structured outputs to prevent database corruption."
-    },
-    {
-      technology: "Next.js App Router",
-      why: "Server Components allow secure server-side fetching of emails without exposing API keys to the client.",
-      alternativesConsidered: "React SPA + separate Express backend.",
-      tradeoffs: "Steeper learning curve with the new caching mechanics compared to the old Pages router.",
-      benefits: "Eliminates network waterfalls, vastly improving dashboard load times.",
-      lessonsLearned: "Next.js cache invalidation (revalidateTag) must be planned carefully for dynamic user data."
+      why: "[To Be Documented - Why Gemini over OpenAI/Claude]",
+      alternativesConsidered: "[To Be Documented]",
+      tradeoffs: "[To Be Documented]",
+      benefits: "[To Be Documented]",
+      lessonsLearned: "[To Be Documented]"
     }
   ],
   features: [
     {
       icon: "Mail",
-      title: "Inbox Scanning",
-      description: "Securely scans your inbox for receipts, invoices, and subscription confirmations.",
-      businessValue: "Zero manual data entry required."
-    },
-    {
-      icon: "PieChart",
-      title: "Spending Analytics",
-      description: "Visualizes monthly spend, categorizes subscriptions, and highlights price hikes.",
-      businessValue: "Provides immediate financial clarity."
+      title: "Gmail Integration",
+      description: "Securely scans Gmail for subscription receipts.",
+      businessValue: "[To Be Documented]"
     },
     {
       icon: "FileText",
-      title: "PDF Extraction",
-      description: "Upload bank statements for AI to extract recurring charges.",
-      businessValue: "Supports users who prefer not to link their email."
+      title: "PDF Parsing",
+      description: "Extracts subscription data from uploaded bank statements.",
+      businessValue: "[To Be Documented]"
     },
     {
       icon: "TrendingDown",
-      title: "Savings AI",
-      description: "Suggests cheaper alternatives or highlights unused services.",
-      businessValue: "Directly saves the user money."
+      title: "Savings Analysis",
+      description: "Visualizes spending habits and potential savings.",
+      businessValue: "[To Be Documented]"
     }
   ],
   architecture: {
     frontend: {
-      name: "Next.js Server Components",
-      description: "Renders the dashboard and handles client-side state.",
-      technologies: "React 18, Tailwind, Framer Motion"
+      name: "Next.js",
+      description: "[To Be Documented]",
+      technologies: "Next.js, TypeScript"
     },
     backend: {
-      name: "Next.js API Routes",
-      description: "Handles the logic for fetching emails and communicating with the AI model.",
-      technologies: "Node.js (Serverless Edge)"
+      name: "[To Be Documented]",
+      description: "[To Be Documented]",
+      technologies: "[To Be Documented]"
     },
     database: {
-      name: "Supabase (PostgreSQL)",
-      description: "Stores user profiles, extracted subscriptions, and historical data.",
-      technologies: "PostgreSQL, PostgREST"
+      name: "Supabase",
+      description: "[To Be Documented]",
+      technologies: "Supabase"
     },
     ai: {
-      name: "Google Gemini",
-      description: "Extracts structured {merchant, amount, currency, date} from raw text.",
-      technologies: "Gemini 1.5 Flash API"
+      name: "Gemini AI",
+      description: "Analyzes text from emails and PDFs to identify recurring charges.",
+      technologies: "Gemini API"
     },
     external: {
-      name: "Google Gmail API",
-      description: "Provides read-only access to user emails for receipt scanning.",
+      name: "Google OAuth API",
+      description: "Handles user authentication and Gmail inbox access.",
       technologies: "OAuth 2.0"
     },
     deployment: {
-      name: "Vercel",
-      description: "Global edge network for fast dashboard delivery.",
-      technologies: "Vercel Edge Functions"
+      name: "[To Be Documented]",
+      description: "[To Be Documented]",
+      technologies: "[To Be Documented]"
     },
-    communicationFlow: "Client -> Next.js Server -> Gmail API -> Gemini API -> Supabase DB."
+    communicationFlow: "[To Be Documented]"
   },
-  apiDocumentation: [
-    {
-      name: "Sync Gmail",
-      purpose: "Fetches the latest receipts.",
-      endpoints: "POST /api/sync/gmail",
-      authentication: "Supabase Session",
-      exampleUsage: "fetch('/api/sync/gmail', { method: 'POST' })",
-      reason: "Triggers the heavy lifting background job to update the user's dashboard."
-    }
-  ],
+  apiDocumentation: [], // To Be Documented
   databaseDesign: {
-    tables: ["Users", "Subscriptions", "Transactions"],
-    relationships: "User -> Subscriptions (1:N), Subscription -> Transactions (1:N)",
-    indexes: "Indexed on UserID and Date for fast timeline queries.",
-    constraints: "Currency must be ISO code. Amounts must be positive.",
-    optimization: "Rolled-up monthly aggregates stored in a materialized view for fast dashboard loading.",
-    security: "Supabase Row Level Security (RLS) ensures users can ONLY select/insert/update their own records."
+    tables: ["[To Be Documented]"],
+    relationships: "[To Be Documented]",
+    indexes: "[To Be Documented]",
+    constraints: "[To Be Documented]",
+    optimization: "[To Be Documented]",
+    security: "[To Be Documented]"
   },
   security: {
-    authentication: "OAuth 2.0 via Google.",
-    authorization: "Supabase RLS policies tied to the authenticated user's UUID.",
-    validation: "Zod schemas validate all data returning from the AI before insertion.",
-    sanitization: "React automatically escapes rendered strings.",
-    owasp: ["Injection (Prevented via ORM/Prepared Statements)", "Broken Auth (Handled by OAuth provider)"],
-    errorHandling: "User-friendly toasts for failures, sentry logging for API drops.",
-    rateLimiting: "API routes rate limited via Vercel Edge middleware.",
-    encryption: "Data in transit (TLS), Data at rest (AES-256 via Supabase)."
+    authentication: "Google OAuth",
+    authorization: "[To Be Documented]",
+    validation: "[To Be Documented]",
+    sanitization: "[To Be Documented]",
+    owasp: ["[To Be Documented]"],
+    errorHandling: "[To Be Documented]",
+    rateLimiting: "[To Be Documented]",
+    encryption: "[To Be Documented]"
   },
   performance: {
-    codeSplitting: "Route-based splitting.",
-    caching: "Aggregated financial data cached using Next.js revalidate tags.",
-    databaseOptimization: "Materialized views for complex dashboard analytics.",
-    imageOptimization: "next/image used for all merchant logos.",
-    renderOptimization: "Heavy charts dynamically imported.",
-    lazyLoading: "PDF parsing libraries lazy-loaded only when the user uploads a file.",
-    memoryOptimization: "Batch processing emails in chunks of 50 to prevent lambda memory limits."
+    codeSplitting: "[To Be Documented]",
+    caching: "[To Be Documented]",
+    databaseOptimization: "[To Be Documented]",
+    imageOptimization: "[To Be Documented]",
+    renderOptimization: "[To Be Documented]",
+    lazyLoading: "[To Be Documented]",
+    memoryOptimization: "[To Be Documented]"
   },
   aiIntegration: {
-    model: "gemini-1.5-flash",
-    promptEngineering: "System prompt enforces a strict JSON schema for extraction.",
-    responseParsing: "Zod validation catches and discards hallucinations.",
-    structuredOutput: "AI outputs { subscriptions: [{ name, amount, frequency, next_billing_date }] }.",
-    fallbackLogic: "If extraction fails, flags the item for manual user review.",
-    rateLimits: "Queue system implemented to respect Gemini RPM limits.",
-    errorHandling: "Retries on 429 Too Many Requests.",
-    tokenOptimization: "Strips HTML tags and CSS from emails before sending to the model, reducing token usage by 90%."
+    model: "Gemini AI",
+    promptEngineering: "[To Be Documented]",
+    responseParsing: "[To Be Documented]",
+    structuredOutput: "[To Be Documented]",
+    fallbackLogic: "[To Be Documented]",
+    rateLimits: "[To Be Documented]",
+    errorHandling: "[To Be Documented]",
+    tokenOptimization: "[To Be Documented]"
   },
   challenges: [
     {
-      problem: "Inconsistent Email Formats",
-      rootCause: "Companies change receipt layouts constantly, breaking traditional scrapers.",
-      solution: "Pivoted entirely to LLM-based extraction which understands context regardless of layout.",
-      outcome: "Parsing accuracy jumped from 60% to 99%.",
-      lessons: "For unstructured, highly variable text data, LLMs are significantly more robust than Regex."
-    },
-    {
-      problem: "OAuth Token Expiration",
-      rootCause: "Google refresh tokens can expire or be revoked, breaking background syncs.",
-      solution: "Implemented robust error handling to prompt the user to re-authenticate when the refresh token fails.",
-      outcome: "Smooth UX even when tokens expire.",
-      lessons: "Always assume external API tokens are ephemeral."
+      problem: "[To Be Documented - Real technical blocker]",
+      rootCause: "[To Be Documented]",
+      solution: "[To Be Documented]",
+      outcome: "[To Be Documented]",
+      lessons: "[To Be Documented]"
     }
   ],
   developmentTimeline: [
-    { phase: "Prototyping", description: "Tested Gemini's ability to extract data from raw HTML emails." },
-    { phase: "Auth Setup", description: "Configured Google Cloud Console and Supabase Auth." },
-    { phase: "UI/UX", description: "Designed the glassmorphism dashboard and charts." },
-    { phase: "Integration", description: "Wired up the Next.js API routes with the DB." },
-    { phase: "Launch", description: "Deployed to Vercel." }
+    { phase: "Implementation", description: "[To Be Documented]" }
   ],
   lessonsLearned: [
-    "Next.js Server Components drastically simplify data fetching and security.",
-    "Data validation (Zod) is mandatory when working with LLM outputs.",
-    "Third-party OAuth integration always takes longer than expected."
+    "[To Be Documented - Real technical lesson]"
   ],
   futureRoadmap: [
-    "Plaid integration for direct bank sync",
-    "One-click subscription cancellation (using virtual cards)",
-    "Shared household tracking",
-    "Mobile app wrapper (React Native)"
+    "[To Be Documented]"
   ],
   repository: {
     name: "subsense",
-    description: "An AI-powered subscription manager scanning Gmail.",
+    description: "AI Subscription Intelligence Platform.",
     primaryLanguage: "TypeScript",
     url: "https://github.com/ALLaNRoY-TECH/subsense",
-    techStack: ["Next.js", "Supabase", "Tailwind"],
-    license: "MIT",
-    lastUpdated: "Jan 2025"
+    techStack: ["Next.js", "Supabase", "TypeScript"],
+    license: "[To Be Documented]",
+    lastUpdated: "[To Be Documented]"
   }
 };

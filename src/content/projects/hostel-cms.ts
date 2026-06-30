@@ -3,207 +3,168 @@ import { CaseStudy } from "@/types/case-study";
 export const hostelCms: CaseStudy = {
   id: "hostel-cms",
   hero: {
-    title: "Hostel CMS",
-    subtitle: "Role-Based Complaint Management System",
-    status: "Completed",
-    completed: "May 2023",
+    title: "Smart Hostel CMS",
+    subtitle: "Comprehensive Hostel Management System",
+    status: "Production",
+    completed: "[To Be Documented]",
     role: "Full-Stack Developer",
-    duration: "12 Weeks",
-    techStack: ["React", "Node.js", "Express", "MySQL", "JWT"],
+    duration: "[To Be Documented]",
+    techStack: ["React", "Node.js", "Analytics"],
     githubUrl: "https://github.com/ALLaNRoY-TECH/smart-hostel-management",
   },
   engineeringOverview: {
-    projectType: "Enterprise Internal Dashboard",
-    complexity: "Medium",
-    frontend: "React SPA",
-    backend: "Node.js (Express)",
-    database: "MySQL",
-    ai: "None",
-    deployment: "VPS / DigitalOcean",
+    projectType: "Content Management System",
+    complexity: "[To Be Documented]",
+    frontend: "React",
+    backend: "Node.js",
+    database: "[To Be Documented]",
+    deployment: "[To Be Documented]",
     metrics: [
-      { label: "User Roles", value: 3 },
-      { label: "REST APIs", value: 24 },
-      { label: "Database Tables", value: 12 },
-      { label: "Resolution Time", value: 50, suffix: "% faster" },
+      { label: "Management Modules", value: 4, suffix: "" },
     ]
   },
   overview: {
-    what: "A comprehensive Role-Based Access Control (RBAC) system for managing university hostels, focusing on digitizing complaint tracking, room allocation, and gate passes.",
-    why: "Hostel administration was relying on paper ledgers and WhatsApp groups, leading to lost complaints, unaccountable staff, and frustrated students.",
-    who: "University Administration, Hostel Wardens, and Students.",
-    businessValue: "Digitized operations reduce administrative overhead by 40% and provide an auditable trail for student complaints and security logs."
+    what: "A smart CMS for hostel management including occupancy, visitors, and complaints.",
+    why: "[To Be Documented]",
+    who: "[To Be Documented]",
+    businessValue: "[To Be Documented]"
   },
   problemStatement: {
-    problem: "Paper-based tracking fails at scale. When a student reports a broken fan, there is no SLA (Service Level Agreement), no tracking, and no accountability.",
-    difficulty: "Managing state across three distinct user roles (Admin, Warden, Student) where data visibility must be strictly siloed based on permissions.",
-    limitations: "Existing generic CMS platforms are too bloated and not tailored to the specific workflows of Indian university hostels.",
+    problem: "[To Be Documented]",
+    difficulty: "[To Be Documented]",
+    limitations: "[To Be Documented]",
     painPoints: [
-      "Lost maintenance requests",
-      "No real-time visibility into room occupancy",
-      "Manual and insecure gate pass issuing"
+      "[To Be Documented]",
     ],
-    businessImpact: "Poor living conditions lead to student dissatisfaction and administrative chaos."
+    businessImpact: "[To Be Documented]"
   },
   solution: {
-    architecture: "A classic MERN-stack architecture (replacing Mongo with MySQL for relational integrity). An Express.js REST API serves a React frontend, with JWTs managing role-based sessions.",
-    workflow: "Student logs complaint -> Database updates -> Warden dashboard alerts -> Maintenance assigned -> Status updated -> Student notified.",
-    howItFixes: "Centralizes all operations into a single, relational database where every action is logged, time-stamped, and assigned an owner.",
-    scalability: "Standard horizontally scalable Node.js API with a robust relational database capable of handling thousands of students.",
-    security: "Strict JWT verification middleware on every route ensures students cannot access warden APIs, and wardens cannot access super-admin APIs."
+    architecture: "[To Be Documented]",
+    workflow: "[To Be Documented]",
+    howItFixes: "[To Be Documented]",
+    scalability: "[To Be Documented]",
+    security: "[To Be Documented]"
   },
   engineeringDecisions: [
     {
-      technology: "MySQL",
-      why: "Hostel data is inherently relational. A Student belongs to a Room, a Room belongs to a Hostel, a Complaint belongs to a Student.",
-      alternativesConsidered: "MongoDB.",
-      tradeoffs: "Requires strict schema migrations and planning compared to the flexibility of MongoDB.",
-      benefits: "Enforces data integrity at the database level. Prevents orphaned records via CASCADE rules.",
-      lessonsLearned: "Always choose SQL when the business entities have strict hierarchical relationships."
+      technology: "React",
+      why: "[To Be Documented]",
+      alternativesConsidered: "[To Be Documented]",
+      tradeoffs: "[To Be Documented]",
+      benefits: "[To Be Documented]",
+      lessonsLearned: "[To Be Documented]"
     },
     {
-      technology: "Express.js",
-      why: "Fast, unopinionated backend framework that allowed me to write custom RBAC middleware exactly how the business logic dictated.",
-      alternativesConsidered: "NestJS, Django.",
-      tradeoffs: "Requires manual setup of architecture (routing, controllers, services) compared to an opinionated framework.",
-      benefits: "Total control over the request/response lifecycle.",
-      lessonsLearned: "Without an opinionated framework, folder structure can become messy as the app grows."
-    },
-    {
-      technology: "JWT (JSON Web Tokens)",
-      why: "Stateless authentication reduces database hits on every request. Role claims are embedded directly in the token payload.",
-      alternativesConsidered: "Stateful Session Cookies (Redis).",
-      tradeoffs: "Tokens cannot be easily revoked before expiration without implementing a complex token blacklist.",
-      benefits: "Extremely fast authentication verification at the edge/middleware level.",
-      lessonsLearned: "Always set short expiration times for JWTs and implement a robust refresh token rotation strategy."
+      technology: "Node.js",
+      why: "[To Be Documented]",
+      alternativesConsidered: "[To Be Documented]",
+      tradeoffs: "[To Be Documented]",
+      benefits: "[To Be Documented]",
+      lessonsLearned: "[To Be Documented]"
     }
   ],
   features: [
     {
-      icon: "UserCog",
-      title: "Role-Based Dashboards",
-      description: "Distinct UIs and feature sets for Students, Wardens, and Admins.",
-      businessValue: "Simplifies UX by only showing relevant actions to each user type."
+      icon: "Home",
+      title: "Occupancy Tracking",
+      description: "Real-time tracking of room availability and occupancy.",
+      businessValue: "[To Be Documented]"
     },
     {
-      icon: "TicketCheck",
-      title: "Ticketing System",
-      description: "Track complaints from 'Open' to 'Resolved' with comment threads.",
-      businessValue: "Enforces accountability and SLAs for maintenance staff."
+      icon: "AlertTriangle",
+      title: "Complaints Management",
+      description: "System for students to log complaints and wardens to track resolution.",
+      businessValue: "[To Be Documented]"
     },
     {
-      icon: "DoorOpen",
-      title: "Digital Gate Pass",
-      description: "Students request leave, wardens approve digitally, guards verify via QR.",
-      businessValue: "Enhances campus security and automates attendance."
+      icon: "Users",
+      title: "Visitor Management",
+      description: "Digital logging of hostel visitors.",
+      businessValue: "[To Be Documented]"
     },
     {
-      icon: "BedDouble",
-      title: "Inventory Management",
-      description: "Real-time tracking of room occupancy and available beds.",
-      businessValue: "Optimizes hostel revenue and space allocation."
+      icon: "BarChart",
+      title: "Analytics Dashboard",
+      description: "Visual insights into hostel operations.",
+      businessValue: "[To Be Documented]"
     }
   ],
   architecture: {
     frontend: {
-      name: "React SPA",
-      description: "Single Page Application consuming REST APIs.",
-      technologies: "React, Axios, React Router"
+      name: "React",
+      description: "[To Be Documented]",
+      technologies: "React"
     },
     backend: {
-      name: "Express.js API",
-      description: "RESTful API handling business logic and authorization.",
-      technologies: "Node.js, Express, Joi (Validation)"
+      name: "Node.js",
+      description: "[To Be Documented]",
+      technologies: "Node.js"
     },
     database: {
-      name: "MySQL Server",
-      description: "Relational database maintaining ACID properties.",
-      technologies: "MySQL 8.0, Sequelize ORM"
+      name: "[To Be Documented]",
+      description: "[To Be Documented]",
+      technologies: "[To Be Documented]"
     },
     deployment: {
-      name: "Virtual Private Server",
-      description: "Standard VPS deployment with PM2 for process management.",
-      technologies: "DigitalOcean, PM2, Nginx"
+      name: "[To Be Documented]",
+      description: "[To Be Documented]",
+      technologies: "[To Be Documented]"
     },
-    communicationFlow: "React SPA -> Express API (Auth Middleware) -> MySQL."
+    communicationFlow: "[To Be Documented]"
   },
-  apiDocumentation: [
-    {
-      name: "Create Complaint",
-      purpose: "Allows a student to log a maintenance issue.",
-      endpoints: "POST /api/complaints",
-      authentication: "JWT (Role: Student)",
-      exampleUsage: "POST { title: 'Broken Fan', category: 'Electrical' }",
-      reason: "Core workflow entry point."
-    },
-    {
-      name: "Update Status",
-      purpose: "Allows a warden to close a ticket.",
-      endpoints: "PATCH /api/complaints/:id",
-      authentication: "JWT (Role: Warden/Admin)",
-      exampleUsage: "PATCH { status: 'Resolved' }",
-      reason: "Enforces RBAC; students cannot close their own tickets."
-    }
-  ],
+  apiDocumentation: [], // To Be Documented
   databaseDesign: {
-    tables: ["Users", "Roles", "Rooms", "Complaints", "GatePasses"],
-    relationships: "Highly normalized. Foreign keys link Complaints to Users and Rooms.",
-    indexes: "Indexed on UserID, Status, and Date for fast dashboard filtering.",
-    constraints: "ON DELETE CASCADE for student records to maintain DB cleanliness.",
-    optimization: "Pagination implemented at the database level using LIMIT and OFFSET to handle thousands of complaints.",
-    security: "Prepared statements used exclusively to prevent SQL Injection."
+    tables: ["[To Be Documented]"],
+    relationships: "[To Be Documented]",
+    indexes: "[To Be Documented]",
+    constraints: "[To Be Documented]",
+    optimization: "[To Be Documented]",
+    security: "[To Be Documented]"
   },
   security: {
-    authentication: "Bcrypt hashing for passwords. JWT for session management.",
-    authorization: "Custom Express middleware checks `req.user.role` against allowed roles for every route.",
-    validation: "Joi used for request payload validation before hitting controllers.",
-    sanitization: "Express-validator used to escape input.",
-    owasp: ["Broken Access Control (Mitigated via strict RBAC)", "SQLi (Mitigated via ORM/Prepared statements)"],
-    errorHandling: "Centralized error handling middleware standardizes API responses.",
-    rateLimiting: "express-rate-limit applied to login routes to prevent brute force.",
-    encryption: "Passwords salted and hashed. TLS for API endpoints."
+    authentication: "[To Be Documented]",
+    authorization: "[To Be Documented]",
+    validation: "[To Be Documented]",
+    sanitization: "[To Be Documented]",
+    owasp: ["[To Be Documented]"],
+    errorHandling: "[To Be Documented]",
+    rateLimiting: "[To Be Documented]",
+    encryption: "[To Be Documented]"
   },
   performance: {
-    codeSplitting: "React Router lazy loading for different dashboards.",
-    caching: "N/A (Data is highly dynamic, requiring real-time accuracy).",
-    databaseOptimization: "Proper foreign key indexing reduces JOIN query times.",
-    imageOptimization: "N/A",
-    renderOptimization: "Use of useMemo for heavy data tables.",
-    lazyLoading: "N/A",
-    memoryOptimization: "Node streams used if exporting large CSV reports."
+    codeSplitting: "[To Be Documented]",
+    caching: "[To Be Documented]",
+    databaseOptimization: "[To Be Documented]",
+    imageOptimization: "[To Be Documented]",
+    renderOptimization: "[To Be Documented]",
+    lazyLoading: "[To Be Documented]",
+    memoryOptimization: "[To Be Documented]"
   },
   challenges: [
     {
-      problem: "Authorization leaks.",
-      rootCause: "Initially, the frontend hid buttons based on roles, but the backend APIs were unprotected.",
-      solution: "Implemented a robust `authorizeRoles(...roles)` middleware on every single Express route.",
-      outcome: "Secured the application from malicious API requests.",
-      lessons: "Never trust the client. Authorization must always be enforced on the server."
+      problem: "[To Be Documented]",
+      rootCause: "[To Be Documented]",
+      solution: "[To Be Documented]",
+      outcome: "[To Be Documented]",
+      lessons: "[To Be Documented]"
     }
   ],
   developmentTimeline: [
-    { phase: "Database Design", description: "Drafted the ER diagram and normalized the schema." },
-    { phase: "API & Auth", description: "Built the Express server and JWT RBAC middleware." },
-    { phase: "Frontend Logic", description: "Created the React SPA and Axios interceptors for token handling." },
-    { phase: "Dashboards", description: "Built distinct views for Students and Wardens." },
-    { phase: "Deployment", description: "Hosted the DB and Node server." }
+    { phase: "Implementation", description: "[To Be Documented]" }
   ],
   lessonsLearned: [
-    "Relational databases are vastly superior for structured business applications compared to NoSQL.",
-    "RBAC requires careful planning at the routing layer; bolting it on later is a nightmare.",
-    "Axios interceptors are essential for silently refreshing or handling expired JWTs."
+    "[To Be Documented]"
   ],
   futureRoadmap: [
-    "Biometric (Fingerprint) integration for gate passes",
-    "Automated fee collection via payment gateways",
-    "Mobile app for students (React Native)"
+    "[To Be Documented]"
   ],
   repository: {
     name: "smart-hostel-management",
-    description: "Role-based access control system for university hostels.",
-    primaryLanguage: "JavaScript",
+    description: "Comprehensive Hostel Management System.",
+    primaryLanguage: "TypeScript/JavaScript",
     url: "https://github.com/ALLaNRoY-TECH/smart-hostel-management",
-    techStack: ["React", "Node.js", "MySQL"],
-    license: "MIT",
-    lastUpdated: "May 2023"
+    techStack: ["React", "Node.js"],
+    license: "[To Be Documented]",
+    lastUpdated: "[To Be Documented]"
   }
 };

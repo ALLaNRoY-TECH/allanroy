@@ -4,199 +4,167 @@ export const ventpod: CaseStudy = {
   id: "ventpod",
   hero: {
     title: "VentPod",
-    subtitle: "Anonymous Mental Health Platform",
+    subtitle: "Anonymous Real-time Chat Platform",
     status: "Production",
-    completed: "Oct 2023",
-    role: "Backend Architect",
-    duration: "6 Weeks",
-    techStack: ["Flask", "MySQL", "WebSockets", "Socket.IO", "React"],
+    completed: "[To Be Documented]",
+    role: "Full-Stack Developer",
+    duration: "[To Be Documented]",
+    techStack: ["Next.js", "WebSockets", "Encryption"],
     githubUrl: "https://github.com/ALLaNRoY-TECH/vent-pod",
   },
   engineeringOverview: {
-    projectType: "Real-time Messaging Web App",
-    complexity: "High",
-    frontend: "React, CSS Modules",
-    backend: "Python (Flask-SocketIO)",
-    database: "Redis & MySQL",
-    ai: "None",
-    deployment: "Docker, AWS EC2",
+    projectType: "Real-time Application",
+    complexity: "[To Be Documented]",
+    frontend: "Next.js",
+    backend: "[To Be Documented]",
+    database: "[To Be Documented]",
+    deployment: "[To Be Documented]",
     metrics: [
-      { label: "Active Sessions", value: 100, suffix: "+" },
-      { label: "Latency", value: 50, suffix: "ms" },
-      { label: "Uptime", value: 99.9, suffix: "%" },
-      { label: "Data Retained", value: 0, suffix: " bytes" },
+      { label: "Active Users tracking", value: 1, suffix: "" },
     ]
   },
   overview: {
-    what: "A real-time, completely anonymous chat platform designed for people to vent and receive peer support without fear of judgment or data tracking.",
-    why: "Many mental health apps require sign-ups, track user data, and monetize sensitive information. There was a need for a truly ephemeral, safe space.",
-    who: "Students, professionals, and anyone experiencing temporary stress who needs an immediate, frictionless outlet.",
-    businessValue: "Provides a zero-barrier entry to mental health support, prioritizing user privacy above all else."
+    what: "An anonymous, real-time chat application.",
+    why: "[To Be Documented]",
+    who: "[To Be Documented]",
+    businessValue: "[To Be Documented]"
   },
   problemStatement: {
-    problem: "People hesitate to share mental health struggles online because of a lack of true anonymity.",
-    difficulty: "Building a real-time system that is both secure from bad actors (trolls, spam) while maintaining absolute anonymity (no accounts) is contradictory.",
-    limitations: "Existing forums require accounts. Anonymous apps like YikYak suffered from localized toxicity.",
+    problem: "[To Be Documented]",
+    difficulty: "[To Be Documented - Specific challenges in real-time anonymous comms]",
+    limitations: "[To Be Documented]",
     painPoints: [
-      "Fear of data breaches leaking sensitive conversations",
-      "Friction of creating accounts when in distress",
-      "Lack of real-time peer connection"
+      "[To Be Documented]",
     ],
-    businessImpact: "Users abandon platforms if they feel their identity is even slightly compromised."
+    businessImpact: "[To Be Documented]"
   },
   solution: {
-    architecture: "A React frontend connecting via WebSockets to a Python Flask backend. Messages are broadcasted in real-time and explicitly NOT saved to any persistent database.",
-    workflow: "User opens app -> Assigned random avatar/alias -> Connects to WebSocket room -> Chats -> Disconnects -> Room and memory cleared.",
-    howItFixes: "By removing the database for chat history, the system is fundamentally incapable of leaking past conversations.",
-    scalability: "Socket.IO instances scaled horizontally using Redis as a Pub/Sub adapter to sync messages across multiple server nodes.",
-    security: "Ephemeral architecture. What is not stored cannot be stolen."
+    architecture: "[To Be Documented]",
+    workflow: "[To Be Documented]",
+    howItFixes: "[To Be Documented]",
+    scalability: "[To Be Documented]",
+    security: "[To Be Documented]"
   },
   engineeringDecisions: [
     {
-      technology: "Flask & Socket.IO",
-      why: "Flask is lightweight, perfect for an ephemeral app. Socket.IO provides robust WebSocket fallbacks (long polling) for restrictive networks.",
-      alternativesConsidered: "Node.js with pure WebSockets or Socket.io.",
-      tradeoffs: "Flask is synchronous by default, requiring eventlet/gevent for asynchronous WebSocket handling, which complicates deployment.",
-      benefits: "Enabled rapid prototyping of the backend logic in Python.",
-      lessonsLearned: "Python is notoriously tricky for scaling WebSockets compared to Node.js; in hindsight, Node.js would have been a better choice for high concurrency."
+      technology: "WebSockets",
+      why: "[To Be Documented - Why WebSockets vs Long Polling]",
+      alternativesConsidered: "[To Be Documented]",
+      tradeoffs: "[To Be Documented]",
+      benefits: "[To Be Documented]",
+      lessonsLearned: "[To Be Documented]"
     },
     {
-      technology: "MySQL",
-      why: "Used strictly for application metadata (banned IPs, active room counts, moderation logs) but NEVER for message content.",
-      alternativesConsidered: "MongoDB, Postgres.",
-      tradeoffs: "Relational DB might be overkill for simple metadata, but provides strict schemas for moderation rules.",
-      benefits: "Easy to enforce unique constraints on hashed IP addresses.",
-      lessonsLearned: "Keep the persistent storage completely isolated from the ephemeral real-time messaging pipeline."
-    },
-    {
-      technology: "Ephemeral State (No Message DB)",
-      why: "To guarantee absolute privacy, the best database for messages is no database.",
-      alternativesConsidered: "Encrypted SQLite, In-memory Redis logs.",
-      tradeoffs: "Users cannot retrieve chat history if they accidentally refresh the page.",
-      benefits: "Immune to data breaches because there is no data to breach.",
-      lessonsLearned: "Users appreciate the tradeoff when the value proposition (absolute privacy) is clearly communicated."
+      technology: "Encryption",
+      why: "[To Be Documented - Specific encryption strategy used]",
+      alternativesConsidered: "[To Be Documented]",
+      tradeoffs: "[To Be Documented]",
+      benefits: "[To Be Documented]",
+      lessonsLearned: "[To Be Documented]"
     }
   ],
   features: [
     {
-      icon: "Ghost",
-      title: "Zero-Knowledge Architecture",
-      description: "Messages exist only in memory and are wiped instantly upon session end.",
-      businessValue: "Guarantees absolute privacy and builds immense user trust."
+      icon: "MessageSquare",
+      title: "Anonymous Chat",
+      description: "Users can chat completely anonymously.",
+      businessValue: "[To Be Documented]"
     },
     {
-      icon: "Zap",
-      title: "Real-time Sockets",
-      description: "Sub-50ms latency for chat messages using optimized WebSocket connections.",
-      businessValue: "Creates a seamless, engaging conversation experience."
+      icon: "Keyboard",
+      title: "Typing Indicator",
+      description: "Real-time typing status of the other user.",
+      businessValue: "[To Be Documented]"
     },
     {
-      icon: "ShieldAlert",
-      title: "Automated Moderation",
-      description: "Real-time profanity and toxicity filtering before messages are broadcasted.",
-      businessValue: "Maintains a safe environment without manual moderators."
+      icon: "Lock",
+      title: "Encryption",
+      description: "Secure messaging implementation.",
+      businessValue: "[To Be Documented]"
     },
     {
       icon: "Users",
-      title: "Dynamic Avatars",
-      description: "Generates unique, non-identifiable avatars per session.",
-      businessValue: "Provides identity within a session without compromising anonymity."
+      title: "Active Users Tracking",
+      description: "Tracks the number of currently active participants.",
+      businessValue: "[To Be Documented]"
     }
   ],
   architecture: {
     frontend: {
-      name: "React SPA",
-      description: "Manages WebSocket state and renders the chat UI.",
-      technologies: "React, Socket.IO-client"
+      name: "Next.js",
+      description: "[To Be Documented]",
+      technologies: "Next.js"
     },
     backend: {
-      name: "Flask-SocketIO Server",
-      description: "Handles Socket.IO connections and moderation logic.",
-      technologies: "Python, Flask, Eventlet"
+      name: "[To Be Documented]",
+      description: "Handles WebSocket connections.",
+      technologies: "WebSockets"
     },
     database: {
-      name: "Redis Broker",
-      description: "Redis for Socket Pub/Sub. MySQL for rate-limiting and ban lists.",
-      technologies: "Redis, MySQL"
+      name: "[To Be Documented]",
+      description: "[To Be Documented]",
+      technologies: "[To Be Documented]"
     },
     deployment: {
-      name: "AWS Infrastructure",
-      description: "Containerized deployment behind an Application Load Balancer.",
-      technologies: "Docker, AWS EC2, Nginx"
+      name: "[To Be Documented]",
+      description: "[To Be Documented]",
+      technologies: "[To Be Documented]"
     },
-    communicationFlow: "Client <-> WebSocket <-> Flask Node <-> Redis Pub/Sub <-> Other Flask Nodes."
+    communicationFlow: "[To Be Documented]"
   },
-  apiDocumentation: [
-    {
-      name: "Connect Room",
-      purpose: "Joins a specific chat pool.",
-      endpoints: "WSS /socket.io/?room=vent",
-      authentication: "None (Session Token)",
-      exampleUsage: "socket.emit('join', { room: 'vent' })",
-      reason: "Establishes the bi-directional real-time connection."
-    }
-  ],
+  apiDocumentation: [], // To Be Documented
   databaseDesign: {
-    tables: ["ModerationLogs", "BannedIPs"],
-    relationships: "Flat tables. Highly denormalized.",
-    indexes: "Indexed by IP hash for rapid ban checking on connection.",
-    constraints: "IP hashes must be unique.",
-    optimization: "Memory-mapped tables for ultra-fast read access during the connection handshake.",
-    security: "IP addresses are one-way hashed before storage; plain IPs are never saved."
+    tables: ["[To Be Documented]"],
+    relationships: "[To Be Documented]",
+    indexes: "[To Be Documented]",
+    constraints: "[To Be Documented]",
+    optimization: "[To Be Documented]",
+    security: "[To Be Documented]"
   },
   security: {
-    authentication: "Completely anonymous. No auth required.",
-    authorization: "Session-based WebSocket tokens to prevent cross-room spoofing.",
-    validation: "Length limits and XSS sanitization on all incoming socket payloads.",
-    sanitization: "Strict HTML escaping before broadcasting messages.",
-    owasp: ["XSS (Escaped)", "DDoS (Rate limited via proxy)"],
-    errorHandling: "Silent failures for socket drops, with automatic client-side reconnection.",
-    rateLimiting: "Nginx limits WebSocket connection attempts to prevent resource exhaustion.",
-    encryption: "WSS (WebSocket Secure) used for all transit."
+    authentication: "[To Be Documented]",
+    authorization: "[To Be Documented]",
+    validation: "[To Be Documented]",
+    sanitization: "[To Be Documented]",
+    owasp: ["[To Be Documented]"],
+    errorHandling: "[To Be Documented]",
+    rateLimiting: "[To Be Documented]",
+    encryption: "[To Be Documented]"
   },
   performance: {
-    codeSplitting: "Minimal frontend bundle for fast initial load.",
-    caching: "Redis caches active room counts.",
-    databaseOptimization: "N/A (Messages are in-memory).",
-    imageOptimization: "Avatars generated via SVG, requiring 0 bytes of image transfer.",
-    renderOptimization: "Virtual scrolling for the chat window to prevent DOM bloat during long sessions.",
-    lazyLoading: "N/A",
-    memoryOptimization: "Strict garbage collection for disconnected socket sessions to prevent memory leaks in Python."
+    codeSplitting: "[To Be Documented]",
+    caching: "[To Be Documented]",
+    databaseOptimization: "[To Be Documented]",
+    imageOptimization: "[To Be Documented]",
+    renderOptimization: "[To Be Documented]",
+    lazyLoading: "[To Be Documented]",
+    memoryOptimization: "[To Be Documented]"
   },
   challenges: [
     {
-      problem: "WebSocket scaling issues.",
-      rootCause: "When deploying multiple Flask instances, a user connected to Instance A couldn't see messages from Instance B.",
-      solution: "Implemented Redis as a message broker (Pub/Sub) between the Socket.IO server instances.",
-      outcome: "Horizontal scaling achieved without splitting the user base.",
-      lessons: "Stateful connections (WebSockets) require a central broker when moving beyond a single server."
+      problem: "[To Be Documented - Real technical blocker]",
+      rootCause: "[To Be Documented]",
+      solution: "[To Be Documented]",
+      outcome: "[To Be Documented]",
+      lessons: "[To Be Documented]"
     }
   ],
   developmentTimeline: [
-    { phase: "Architecture", description: "Decided on the ephemeral, zero-database approach." },
-    { phase: "Sockets", description: "Built the Flask-SocketIO backend and tested latency." },
-    { phase: "Frontend", description: "Created the React chat interface." },
-    { phase: "Moderation", description: "Integrated basic regex-based toxicity filters." },
-    { phase: "Deployment", description: "Configured Nginx for WSS proxying." }
+    { phase: "Implementation", description: "[To Be Documented]" }
   ],
   lessonsLearned: [
-    "WebSockets introduce entirely different scaling challenges compared to stateless REST APIs.",
-    "Designing for absolute privacy requires sacrificing some user convenience (like chat history), but is highly valued by the target audience.",
-    "Nginx requires specific configuration blocks to properly upgrade HTTP requests to WebSockets."
+    "[To Be Documented - Real technical lesson]"
   ],
   futureRoadmap: [
-    "End-to-End Encryption (E2EE) using WebCrypto API",
-    "Voice channels using WebRTC",
-    "AI-based sentiment analysis for better moderation",
-    "Dedicated topic rooms"
+    "[To Be Documented]"
   ],
   repository: {
     name: "vent-pod",
-    description: "An anonymous, zero-knowledge WebSocket chat platform.",
-    primaryLanguage: "Python",
+    description: "Anonymous Real-time Chat Platform.",
+    primaryLanguage: "TypeScript",
     url: "https://github.com/ALLaNRoY-TECH/vent-pod",
-    techStack: ["Python", "Flask", "React", "Socket.IO"],
-    license: "MIT",
-    lastUpdated: "Oct 2023"
+    techStack: ["Next.js", "WebSockets"],
+    license: "[To Be Documented]",
+    lastUpdated: "[To Be Documented]"
   }
 };
