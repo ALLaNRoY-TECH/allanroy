@@ -6,20 +6,20 @@ export const hostelCms: CaseStudy = {
     title: "Smart Hostel CMS",
     subtitle: "Comprehensive Hostel Management System",
     status: "Production",
-    completed: "[To Be Documented]",
+    completed: "",
     role: "Full-Stack Developer",
-    duration: "[To Be Documented]",
+    duration: "",
     techStack: ["React", "Node.js", "Analytics"],
     githubUrl: "https://github.com/ALLaNRoY-TECH/smart-hostel-management",
   },
   engineeringOverview: {
     projectType: "Content Management System",
-    complexity: "[To Be Documented]",
+    complexity: "",
     frontend: "React",
     backend: "Node.js",
-    database: "[To Be Documented]",
-    ai: "[To Be Documented]",
-    deployment: "[To Be Documented]",
+    database: "",
+    ai: "",
+    deployment: "",
     metrics: [
       { label: "Management Modules", value: 4, suffix: "" },
     ]
@@ -50,8 +50,8 @@ export const hostelCms: CaseStudy = {
 4. Concurrency Lock: Before an admin can update a complaint, the backend verifies the 'locked_by' field to ensure no other admin is actively editing it.
 5. Resolution: The admin updates the status or assigns a worker. The lock is released, and the student's dashboard is updated synchronously upon their next fetch.`,
     howItFixes: "By centralizing operations, the platform eliminates paper trails. The distinct role-based API separation ensures students cannot access administrative data, while the concurrency locking mechanism definitively prevents data corruption from simultaneous administrator edits.",
-    scalability: "[To Be Documented]",
-    security: "[To Be Documented]"
+    scalability: "",
+    security: ""
   },
   engineeringDecisions: [
     {
@@ -202,13 +202,13 @@ export const hostelCms: CaseStudy = {
     encryption: "Not implemented in the current codebase (passwords stored in plain text)."
   },
   performance: {
-    codeSplitting: "[To Be Documented]",
-    caching: "[To Be Documented]",
-    databaseOptimization: "[To Be Documented]",
-    imageOptimization: "[To Be Documented]",
-    renderOptimization: "[To Be Documented]",
-    lazyLoading: "[To Be Documented]",
-    memoryOptimization: "[To Be Documented]"
+    codeSplitting: "",
+    caching: "",
+    databaseOptimization: "",
+    imageOptimization: "",
+    renderOptimization: "",
+    lazyLoading: "",
+    memoryOptimization: ""
   },
   challenges: [
     {
@@ -220,7 +220,7 @@ export const hostelCms: CaseStudy = {
     }
   ],
   developmentTimeline: [
-    { phase: "Implementation", description: "[To Be Documented]" }
+    { phase: "Implementation", description: "" }
   ],
   lessonsLearned: [
     "Building a full-stack application involves much more than implementing CRUD operations. Designing a reliable backend requires anticipating how multiple users interact with the same data, enforcing role separation, and protecting data consistency.",
@@ -228,7 +228,7 @@ export const hostelCms: CaseStudy = {
     "If rebuilding for scale, I would replace raw MySQL queries with Prisma ORM for better type safety, implement JWT/bcrypt for secure authentication, introduce Redis for distributed locking and caching, and modularize the backend into dedicated microservices."
   ],
   futureRoadmap: [
-    "[To Be Documented]"
+    ""
   ],
   repository: {
     name: "smart-hostel-management",
@@ -236,7 +236,7 @@ export const hostelCms: CaseStudy = {
     primaryLanguage: "JavaScript",
     url: "https://github.com/ALLaNRoY-TECH/smart-hostel-management",
     techStack: ["React", "Node.js", "MySQL"],
-    license: "[To Be Documented]",
-    lastUpdated: "[To Be Documented]"
+    license: "",
+    lastUpdated: ""
   }
 };

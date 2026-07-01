@@ -6,20 +6,20 @@ export const subsense: CaseStudy = {
     title: "SubSense",
     subtitle: "AI Subscription Intelligence Platform",
     status: "Production",
-    completed: "[To Be Documented]",
+    completed: "",
     role: "Full-Stack Developer",
-    duration: "[To Be Documented]",
+    duration: "",
     techStack: ["Next.js", "TypeScript", "Supabase", "Gemini AI", "Google OAuth"],
     githubUrl: "https://github.com/ALLaNRoY-TECH/subsense",
   },
   engineeringOverview: {
     projectType: "FinTech Platform",
-    complexity: "[To Be Documented]",
+    complexity: "",
     frontend: "Next.js",
-    backend: "[To Be Documented]",
+    backend: "",
     database: "Supabase",
     ai: "Gemini AI",
-    deployment: "[To Be Documented]",
+    deployment: "",
     metrics: [
       { label: "Supported Auth", value: 1, suffix: " (Google)" },
     ]
@@ -43,7 +43,7 @@ export const subsense: CaseStudy = {
     businessImpact: "The goal was not just to track expenses, but to convert scattered financial data into actionable insights. Instead of displaying a static ledger of transactions, SubSense proactively identifies where subscription money is flowing and highlights immediate opportunities to reduce recurring costs."
   },
   solution: {
-    architecture: "[To Be Documented]",
+    architecture: "",
     workflow: `1. Platform Onboarding: User lands on platform; purpose and value proposition established.
 2. Authentication Flow: OAuth initiated; user authenticates and grants strict Gmail read permissions.
 3. Session Initialization: User profile retrieved; secure session and access tokens generated and securely managed.
@@ -54,9 +54,9 @@ export const subsense: CaseStudy = {
 8. Persistence Layer: Processed subscription records, AI insights, and relevant metadata stored in Supabase PostgreSQL.
 9. Dashboard Rendering: Frontend queries persisted data to visualize active subscriptions and potential yearly savings.
 10. Continuous Synchronization: Subsequent scans repeat the ingestion pipeline, dynamically regenerating insights and updating the dashboard.`,
-    howItFixes: "[To Be Documented]",
-    scalability: "[To Be Documented]",
-    security: "[To Be Documented]"
+    howItFixes: "",
+    scalability: "",
+    security: ""
   },
   engineeringDecisions: [
     {
@@ -69,19 +69,19 @@ export const subsense: CaseStudy = {
     },
     {
       technology: "Supabase",
-      why: "[To Be Documented - Why Supabase was chosen over Firebase/Postgres]",
-      alternativesConsidered: "[To Be Documented]",
-      tradeoffs: "[To Be Documented]",
-      benefits: "[To Be Documented]",
-      lessonsLearned: "[To Be Documented]"
+      why: "",
+      alternativesConsidered: "",
+      tradeoffs: "",
+      benefits: "",
+      lessonsLearned: ""
     },
     {
       technology: "Gemini AI",
-      why: "[To Be Documented - Why Gemini over OpenAI/Claude]",
-      alternativesConsidered: "[To Be Documented]",
-      tradeoffs: "[To Be Documented]",
-      benefits: "[To Be Documented]",
-      lessonsLearned: "[To Be Documented]"
+      why: "",
+      alternativesConsidered: "",
+      tradeoffs: "",
+      benefits: "",
+      lessonsLearned: ""
     }
   ],
   features: [
@@ -89,35 +89,35 @@ export const subsense: CaseStudy = {
       icon: "Mail",
       title: "Gmail Integration",
       description: "Securely scans Gmail for subscription receipts.",
-      businessValue: "[To Be Documented]"
+      businessValue: ""
     },
     {
       icon: "FileText",
       title: "PDF Parsing",
       description: "Extracts subscription data from uploaded bank statements.",
-      businessValue: "[To Be Documented]"
+      businessValue: ""
     },
     {
       icon: "TrendingDown",
       title: "Savings Analysis",
       description: "Visualizes spending habits and potential savings.",
-      businessValue: "[To Be Documented]"
+      businessValue: ""
     }
   ],
   architecture: {
     frontend: {
       name: "Next.js",
-      description: "[To Be Documented]",
+      description: "",
       technologies: "Next.js, TypeScript"
     },
     backend: {
-      name: "[To Be Documented]",
-      description: "[To Be Documented]",
-      technologies: "[To Be Documented]"
+      name: "",
+      description: "",
+      technologies: ""
     },
     database: {
       name: "Supabase",
-      description: "[To Be Documented]",
+      description: "",
       technologies: "Supabase"
     },
     ai: {
@@ -131,11 +131,11 @@ export const subsense: CaseStudy = {
       technologies: "OAuth 2.0"
     },
     deployment: {
-      name: "[To Be Documented]",
-      description: "[To Be Documented]",
-      technologies: "[To Be Documented]"
+      name: "",
+      description: "",
+      technologies: ""
     },
-    communicationFlow: "[To Be Documented]"
+    communicationFlow: ""
   },
   apiDocumentation: [
     {
@@ -208,23 +208,23 @@ export const subsense: CaseStudy = {
     encryption: "Cookies are encrypted/signed implicitly by Next.js and marked httpOnly. Google access and refresh tokens are stored in plain text in Supabase, protected by database-level security."
   },
   performance: {
-    codeSplitting: "[To Be Documented]",
-    caching: "[To Be Documented]",
-    databaseOptimization: "[To Be Documented]",
-    imageOptimization: "[To Be Documented]",
-    renderOptimization: "[To Be Documented]",
-    lazyLoading: "[To Be Documented]",
-    memoryOptimization: "[To Be Documented]"
+    codeSplitting: "",
+    caching: "",
+    databaseOptimization: "",
+    imageOptimization: "",
+    renderOptimization: "",
+    lazyLoading: "",
+    memoryOptimization: ""
   },
   aiIntegration: {
     model: "Gemini AI",
-    promptEngineering: "[To Be Documented]",
-    responseParsing: "[To Be Documented]",
-    structuredOutput: "[To Be Documented]",
-    fallbackLogic: "[To Be Documented]",
-    rateLimits: "[To Be Documented]",
-    errorHandling: "[To Be Documented]",
-    tokenOptimization: "[To Be Documented]"
+    promptEngineering: "",
+    responseParsing: "",
+    structuredOutput: "",
+    fallbackLogic: "",
+    rateLimits: "",
+    errorHandling: "",
+    tokenOptimization: ""
   },
   challenges: [
     {
@@ -236,14 +236,14 @@ export const subsense: CaseStudy = {
     }
   ],
   developmentTimeline: [
-    { phase: "Implementation", description: "[To Be Documented]" }
+    { phase: "Implementation", description: "" }
   ],
   lessonsLearned: [
     "AI should not be responsible for understanding raw application data. Instead, deterministic parsing should first convert unstructured information into structured, validated data before utilizing an LLM for reasoning and insight generation. This approach makes AI outputs significantly more reliable, predictable, and easier to maintain.",
     "Long-running backend operations such as Gmail API extraction, PDF parsing, and AI analysis expose the limitations of serverless environments. If rebuilding the architecture today, transitioning these synchronous API operations into an asynchronous, job-based processing pipeline would drastically improve scalability and eliminate execution timeouts."
   ],
   futureRoadmap: [
-    "[To Be Documented]"
+    ""
   ],
   repository: {
     name: "subsense",
@@ -251,7 +251,7 @@ export const subsense: CaseStudy = {
     primaryLanguage: "TypeScript",
     url: "https://github.com/ALLaNRoY-TECH/subsense",
     techStack: ["Next.js", "Supabase", "TypeScript"],
-    license: "[To Be Documented]",
-    lastUpdated: "[To Be Documented]"
+    license: "",
+    lastUpdated: ""
   }
 };

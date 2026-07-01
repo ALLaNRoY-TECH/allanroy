@@ -6,20 +6,20 @@ export const ventpod: CaseStudy = {
     title: "VentPod",
     subtitle: "Anonymous Real-time Chat Platform",
     status: "Production",
-    completed: "[To Be Documented]",
+    completed: "",
     role: "Full-Stack Developer",
-    duration: "[To Be Documented]",
+    duration: "",
     techStack: ["Next.js", "WebSockets", "Encryption"],
     githubUrl: "https://github.com/ALLaNRoY-TECH/vent-pod",
   },
   engineeringOverview: {
     projectType: "Real-time Application",
-    complexity: "[To Be Documented]",
+    complexity: "",
     frontend: "Next.js",
-    backend: "[To Be Documented]",
-    database: "[To Be Documented]",
-    ai: "[To Be Documented]",
-    deployment: "[To Be Documented]",
+    backend: "",
+    database: "",
+    ai: "",
+    deployment: "",
     metrics: [
       { label: "Active Users tracking", value: 1, suffix: "" },
     ]
@@ -51,8 +51,8 @@ export const ventpod: CaseStudy = {
 5. Message Flow: Messages are transmitted bidirectionally via WebSockets. The backend validates the session and routes the message to the paired user instantly.
 6. Termination: Upon intentional disconnection or browser refresh, the WebSocket is closed, and the temporary session is permanently destroyed.`,
     howItFixes: "By intentionally avoiding user authentication and persistent message storage, VentPod guarantees anonymity. The ephemeral session model prevents identity tracking and ensures messages exist only during the lifetime of the active WebSocket connection.",
-    scalability: "[To Be Documented]",
-    security: "[To Be Documented]"
+    scalability: "",
+    security: ""
   },
   engineeringDecisions: [
     {
@@ -191,13 +191,13 @@ export const ventpod: CaseStudy = {
     encryption: "None implemented at rest for messages (relying on 24h TTL deletion)."
   },
   performance: {
-    codeSplitting: "[To Be Documented]",
-    caching: "[To Be Documented]",
-    databaseOptimization: "[To Be Documented]",
-    imageOptimization: "[To Be Documented]",
-    renderOptimization: "[To Be Documented]",
-    lazyLoading: "[To Be Documented]",
-    memoryOptimization: "[To Be Documented]"
+    codeSplitting: "",
+    caching: "",
+    databaseOptimization: "",
+    imageOptimization: "",
+    renderOptimization: "",
+    lazyLoading: "",
+    memoryOptimization: ""
   },
   challenges: [
     {
@@ -209,7 +209,7 @@ export const ventpod: CaseStudy = {
     }
   ],
   developmentTimeline: [
-    { phase: "Implementation", description: "[To Be Documented]" }
+    { phase: "Implementation", description: "" }
   ],
   lessonsLearned: [
     "Building a real-time application involves much more than simply transporting messages. Managing connection lifecycles, rigorous garbage collection of disconnected sessions, and maintaining consistent application state during unexpected network drops are the true engineering challenges.",
@@ -217,7 +217,7 @@ export const ventpod: CaseStudy = {
     "If rebuilding for scale, horizontal scalability must be designed from day one. I would implement Redis Pub/Sub as the Socket.io adapter to sync events across nodes, externalize session state into Redis, and isolate the matchmaking engine into an independent microservice."
   ],
   futureRoadmap: [
-    "[To Be Documented]"
+    ""
   ],
   repository: {
     name: "vent-pod",
@@ -225,7 +225,7 @@ export const ventpod: CaseStudy = {
     primaryLanguage: "JavaScript",
     url: "https://github.com/ALLaNRoY-TECH/vent-pod",
     techStack: ["Node.js", "Socket.IO", "MongoDB", "OpenAI"],
-    license: "[To Be Documented]",
-    lastUpdated: "[To Be Documented]"
+    license: "",
+    lastUpdated: ""
   }
 };

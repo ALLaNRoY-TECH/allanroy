@@ -8,18 +8,18 @@ export const securescan: CaseStudy = {
     status: "Production",
     completed: "Dec 2024",
     role: "Full-Stack Security Developer",
-    duration: "[To Be Documented]",
+    duration: "",
     techStack: ["Next.js", "Python", "AI Insights", "Security Headers"],
     githubUrl: "https://github.com/ALLaNRoY-TECH/SecureScan",
   },
   engineeringOverview: {
     projectType: "Security Tool",
-    complexity: "[To Be Documented]",
+    complexity: "",
     frontend: "Next.js",
     backend: "Python",
-    database: "[To Be Documented]",
+    database: "",
     ai: "Integrated AI Insights",
-    deployment: "[To Be Documented]",
+    deployment: "",
     metrics: [
       { label: "REST APIs", value: 0, prefix: "[TBD] " },
       { label: "AI Models", value: 0, prefix: "[TBD] " },
@@ -43,11 +43,11 @@ export const securescan: CaseStudy = {
     businessImpact: "Automates security checks and presents results in a clean dashboard with actionable remediation steps, reducing security risks for non-expert developers."
   },
   solution: {
-    architecture: "[To Be Documented - Actual architecture implemented]",
-    workflow: "[To Be Documented - Actual user workflow]",
-    howItFixes: "[To Be Documented]",
-    scalability: "[To Be Documented]",
-    security: "[To Be Documented]"
+    architecture: "",
+    workflow: "",
+    howItFixes: "",
+    scalability: "",
+    security: ""
   },
   engineeringDecisions: [
     {
@@ -64,91 +64,91 @@ export const securescan: CaseStudy = {
       icon: "ShieldAlert",
       title: "OWASP Recommendations",
       description: "Provides recommendations based on OWASP security standards.",
-      businessValue: "[To Be Documented]"
+      businessValue: ""
     },
     {
       icon: "Cpu",
       title: "Technology Detection",
       description: "Detects the technology stack of the target website.",
-      businessValue: "[To Be Documented]"
+      businessValue: ""
     },
     {
       icon: "Lock",
       title: "SSL Analysis",
       description: "Analyzes SSL certificate configurations and vulnerabilities.",
-      businessValue: "[To Be Documented]"
+      businessValue: ""
     },
     {
       icon: "Brain",
       title: "AI Insights",
       description: "Provides intelligent security analysis and risk scoring.",
-      businessValue: "[To Be Documented]"
+      businessValue: ""
     }
   ],
   architecture: {
     frontend: {
       name: "Next.js",
-      description: "[To Be Documented]",
+      description: "",
       technologies: "Next.js"
     },
     backend: {
       name: "Python",
-      description: "[To Be Documented]",
+      description: "",
       technologies: "Python"
     },
     database: {
-      name: "[To Be Documented]",
-      description: "[To Be Documented]",
-      technologies: "[To Be Documented]"
+      name: "",
+      description: "",
+      technologies: ""
     },
     ai: {
       name: "AI Engine",
-      description: "[To Be Documented]",
+      description: "",
       technologies: "AI Insights"
     },
     deployment: {
-      name: "[To Be Documented]",
-      description: "[To Be Documented]",
-      technologies: "[To Be Documented]"
+      name: "",
+      description: "",
+      technologies: ""
     },
-    communicationFlow: "[To Be Documented]"
+    communicationFlow: ""
   },
   apiDocumentation: [], // To Be Documented
   databaseDesign: {
-    tables: ["[To Be Documented]"],
-    relationships: "[To Be Documented]",
-    indexes: "[To Be Documented]",
-    constraints: "[To Be Documented]",
-    optimization: "[To Be Documented]",
-    security: "[To Be Documented]"
+    tables: [""],
+    relationships: "",
+    indexes: "",
+    constraints: "",
+    optimization: "",
+    security: ""
   },
   security: {
-    authentication: "[To Be Documented]",
-    authorization: "[To Be Documented]",
-    validation: "[To Be Documented]",
-    sanitization: "[To Be Documented]",
-    owasp: ["[To Be Documented]"],
-    errorHandling: "[To Be Documented]",
-    rateLimiting: "[To Be Documented]",
-    encryption: "[To Be Documented]"
+    authentication: "",
+    authorization: "",
+    validation: "",
+    sanitization: "",
+    owasp: [""],
+    errorHandling: "",
+    rateLimiting: "",
+    encryption: ""
   },
   performance: {
-    codeSplitting: "[To Be Documented]",
-    caching: "[To Be Documented]",
-    databaseOptimization: "[To Be Documented]",
-    imageOptimization: "[To Be Documented]",
-    renderOptimization: "[To Be Documented]",
-    lazyLoading: "[To Be Documented]",
-    memoryOptimization: "[To Be Documented]"
+    codeSplitting: "",
+    caching: "",
+    databaseOptimization: "",
+    imageOptimization: "",
+    renderOptimization: "",
+    lazyLoading: "",
+    memoryOptimization: ""
   },
   aiIntegration: {
     model: "AI Insights Engine",
     promptEngineering: "Provided structured security scan results to the AI rather than raw scans.",
     responseParsing: "AI parses the structured data to prioritize issues and generate plain-English remediation.",
     structuredOutput: "Deterministic scan aggregation before AI inference.",
-    fallbackLogic: "[To Be Documented]",
-    rateLimits: "[To Be Documented]",
-    errorHandling: "[To Be Documented]",
+    fallbackLogic: "",
+    rateLimits: "",
+    errorHandling: "",
     tokenOptimization: "Scanning engine performs deterministic vulnerability discovery; AI is restricted purely to interpretation, saving tokens and preventing hallucinations."
   },
   challenges: [
@@ -167,7 +167,7 @@ export const securescan: CaseStudy = {
     "Extensibility should be considered from the beginning. Designing around strict contracts and predictable outputs simplifies testing, reporting, and future AI integrations."
   ],
   futureRoadmap: [
-    "[To Be Documented]"
+    ""
   ],
   repository: {
     name: "SecureScan",
@@ -175,7 +175,7 @@ export const securescan: CaseStudy = {
     primaryLanguage: "TypeScript/Python",
     url: "https://github.com/ALLaNRoY-TECH/SecureScan",
     techStack: ["Next.js", "Python"],
-    license: "[To Be Documented]",
-    lastUpdated: "[To Be Documented]"
+    license: "",
+    lastUpdated: ""
   }
 };

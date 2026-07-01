@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { X } from "lucide-react";
 import { CaseStudy } from "@/types/case-study";
@@ -41,7 +42,10 @@ const NAV_SECTIONS = [
 ];
 
 export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     if (project) {
       document.body.style.overflow = "hidden";
       const handleEsc = (e: KeyboardEvent) => {
@@ -57,10 +61,13 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
     }
   }, [project, onClose]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {project && <InnerCaseStudyModal project={project} onClose={onClose} />}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
 
@@ -145,7 +152,7 @@ function InnerCaseStudyModal({ project, onClose }: { project: CaseStudy, onClose
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: 20, opacity: 0, scale: 0.98 }}
           transition={{ type: "spring", damping: 30, stiffness: 300 }}
-          className="relative w-full max-w-[1400px] h-screen bg-[#050505] md:my-8 md:h-[calc(100vh-4rem)] md:rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden"
+          className="relative w-full max-w-[1400px] h-[100dvh] bg-[#050505] md:my-8 md:h-[calc(100vh-4rem)] md:rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}

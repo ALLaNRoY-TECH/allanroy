@@ -19,7 +19,7 @@ export default function ProjectPreviewBoard({ projectId }: { projectId: ProjectI
   }
 
   return (
-    <div className="px-6 md:px-16 w-full max-w-6xl mx-auto -mt-16 mb-16 perspective-1000">
+    <div className="hidden md:block px-6 md:px-16 w-full max-w-6xl mx-auto -mt-16 mb-16 perspective-1000">
       <motion.div
         className="w-full aspect-video md:aspect-[16/9] lg:aspect-[21/9] rounded-[2rem] border border-white/10 bg-white/[0.02] backdrop-blur-2xl shadow-[0_30px_60px_rgba(0,0,0,0.5)] overflow-hidden relative"
         onMouseMove={handleMouse}

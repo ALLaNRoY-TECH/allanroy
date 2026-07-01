@@ -14,12 +14,12 @@ export function CaseStudyHero({ hero }: { hero: ICaseStudyHero }) {
       <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-4">{hero.title}</h1>
       <p className="text-xl md:text-3xl text-white/60 max-w-3xl font-light mb-12">{hero.subtitle}</p>
       
-      <div className="flex gap-4 mt-8">
-        <a href={hero.githubUrl} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors flex items-center gap-2">
+      <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
+        <a href={hero.githubUrl} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors flex items-center justify-center gap-2">
           <FaGithub className="w-4 h-4" /> View Repository
         </a>
         {hero.liveUrl && (
-          <a href={hero.liveUrl} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-white/10 text-white font-semibold hover:bg-white/20 transition-colors border border-white/20 flex items-center gap-2">
+          <a href={hero.liveUrl} target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-white/10 text-white font-semibold hover:bg-white/20 transition-colors border border-white/20 flex items-center justify-center gap-2">
             <FaExternalLinkAlt className="w-4 h-4" /> Live Demo
           </a>
         )}
