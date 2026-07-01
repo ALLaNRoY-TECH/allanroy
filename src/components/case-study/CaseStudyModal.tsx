@@ -139,6 +139,7 @@ function InnerCaseStudyModal({ project, onClose }: { project: CaseStudy, onClose
         transition={{ duration: 0.4 }}
         className="fixed inset-0 z-[9999] flex justify-center bg-black/80 backdrop-blur-2xl"
         onClick={onClose}
+        data-lenis-prevent="true"
       >
         {/* Top Reading Progress Bar */}
         <motion.div 
@@ -168,6 +169,7 @@ function InnerCaseStudyModal({ project, onClose }: { project: CaseStudy, onClose
           {/* Scrollable Container */}
           <div 
             ref={scrollContainerRef}
+            data-lenis-prevent="true"
             className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth relative custom-scrollbar"
           >
             {/* Hero & Overview (Full Width) */}
