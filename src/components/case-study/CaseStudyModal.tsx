@@ -45,7 +45,11 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     if (project) {
       document.body.style.overflow = "hidden";
       const handleEsc = (e: KeyboardEvent) => {
@@ -140,6 +144,8 @@ function InnerCaseStudyModal({ project, onClose }: { project: CaseStudy, onClose
         className="fixed inset-0 z-[9999] flex justify-center bg-black/80 backdrop-blur-2xl"
         onClick={onClose}
         data-lenis-prevent="true"
+        role="dialog"
+        aria-modal="true"
       >
         {/* Top Reading Progress Bar */}
         <motion.div 

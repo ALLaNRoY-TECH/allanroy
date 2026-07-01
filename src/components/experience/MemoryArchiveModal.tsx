@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -11,12 +12,18 @@ interface MemoryArchiveModalProps {
 }
 
 export default function MemoryArchiveModal({ isOpen, onClose }: MemoryArchiveModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
       const handleEsc = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
-          // Inner component will handle its own escape key for image viewer, but we handle general close here
           onClose();
         }
       };
@@ -25,13 +32,18 @@ export default function MemoryArchiveModal({ isOpen, onClose }: MemoryArchiveMod
         document.body.style.overflow = "";
         window.removeEventListener("keydown", handleEsc);
       };
+    } else {
+      document.body.style.overflow = "";
     }
   }, [isOpen, onClose]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && <InnerMemoryArchiveModal onClose={onClose} />}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
 
@@ -71,6 +83,9 @@ function InnerMemoryArchiveModal({ onClose }: { onClose: () => void }) {
           exit={{ opacity: 0, backdropFilter: "blur(0px)", transition: { duration: 0.8, ease: "easeInOut" } }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="fixed inset-0 z-[10000] bg-black/80 flex justify-center"
+          role="dialog"
+          aria-modal="true"
+          data-lenis-prevent="true"
         >
           {/* Close Button */}
           <motion.button
@@ -86,7 +101,8 @@ function InnerMemoryArchiveModal({ onClose }: { onClose: () => void }) {
 
           <div 
             ref={containerRef}
-            className="w-full h-full overflow-y-auto overflow-x-hidden scroll-smooth relative"
+            className="w-full h-[100dvh] overflow-y-auto overflow-x-hidden scroll-smooth relative"
+            data-lenis-prevent="true"
           >
             <div className="max-w-4xl mx-auto pt-32 pb-64 px-6 md:px-12 relative">
               
@@ -277,6 +293,7 @@ function ImageViewer({ selectedImage, onClose, memories, setTargetImage }: { sel
           transition={{ duration: 0.3 }}
           className="fixed inset-0 z-[20000] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-4 md:p-12"
           onClick={onClose}
+          data-lenis-prevent="true"
         >
           {/* Viewer Close Button */}
           <button
